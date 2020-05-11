@@ -1,0 +1,124 @@
+﻿body {
+    padding-bottom: 20px;
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+    background-image: url('/imgs/background.jpg');
+    background-attachment: fixed;
+}
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+
+.thumb-frame a {
+    color: gray;
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    transition: all .3s ease-in-out;
+}
+.thumb-frame a:hover {
+    color: black;
+    text-decoration:  underline;
+}
+
+.thumb-header{
+    overflow: hidden;
+}
+
+.thumb {
+    overflow: hidden;
+    min-height: 200px;
+    padding: 1em;
+    background-position: center;
+    background-size: cover;
+    transition: all .2s ease-in-out;
+}
+    .thumb:hover {
+        transform: scale(1.2);
+    }
+/*
+.img-thumb {
+    width:100%;
+    display: block;
+    height: auto;
+}*/
+.thumb-frame {
+    border-width: 1px;
+    border-color: black;
+    border-style: solid;
+    width: 280px;
+    margin-bottom: 1em;
+    height: 300px;
+    padding: 0 !important;
+    border-radius: 5px;
+    background-color: floralwhite;
+}
+.thumb-foot{
+    position: sticky;
+    bottom:0;
+}
+.description {
+    width:80%;
+}
+
+.img-edit {
+    width: 200px;
+    height: auto;
+}
+.img-edit:hover {
+    opacity:0.5;
+    background-image: url('/imgs/plus.png');
+    background-size: cover;
+    cursor:pointer;
+    z-index:-1;
+}
+
+.price-frame {
+    background-color: white;
+    width: auto;
+    width: 30%;
+    float: right;
+    bottom: 0;
+    opacity: 0.9; 
+    border-radius: 2px;
+}
+.discount {
+    color: red;
+    font-size:  x-small;
+    margin-left: -10px;
+    position:absolute;
+}
+.price {
+    margin-left:10px;
+}
+.price-strike {
+    text-decoration: line-through;
+    font-size: smaller;
+}
+.add-to-cart {
+    width: 40px;
+    padding: 2px !important;
+    height: 40px;
+    float:right;
+    opacity:0.9;
+}
+.add-to-cart-image {
+    width: 100%;
+    height: auto;
+}
+.cart-thumbnail {
+    width: 100px;
+    height: auto;
+}
+.footer{
+    position:sticky;
+    margin-bottom:0px;
+}

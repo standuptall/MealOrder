@@ -1,0 +1,50 @@
+﻿
+@{
+    ViewBag.Title = "Checkout";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<form class="form" method="post" enctype="multipart/form-data" id="cart_form">
+    <div class="row">
+        <table class="table">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Prodotto</th>
+                    <th>Quantità</th>
+                    <th>Prezzo</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (BillMealMVC.Models.CartRows row in Model.Items)
+                {
+                    <tr>
+                        <th><img class="cart-thumbnail" src="~/imgs/@(row.ItemId).jpg" />@row.Item.Name</th>
+                        <th><input class="form-control" style="width:100px;" value="@row.Quantity" type="number" name="Quantity" onchange="cart_reload(@(row.CartRowId),this)" /></th>
+                        <th>@Utils.GetPrice(row.Item)</th>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <div class="container">
+            <div class="form-group ">
+                <label for="email" class="success">Ora di consegna</label>
+                <input type="number" name="DeliveryHour" id="DeliveryHour" class="form-control" />
+                <input type="number" name="DeliveryMinute" id="DeliveryMinute" class="form-control" />
+            </div>
+            <div class="form-group ">
+                <label for="email" class="success">E-mail</label>
+                <input type="email" name="email" id="email" class="form-control" style="width:100%;" />
+            </div>
+            <div class="form-group ">
+                <label for="phone" class="success">Numero di telefono</label>
+                <input type="number" name="Phone" id="Phone" class="form-control" style="width:100%;" />
+            </div>
+            <div class="form-group ">
+                <label for="Notes" class="success">Inserisci note aggiuntive all'ordine (es. ingredienti +/-)</label>
+                <textarea rows="3" name="Notes" id="Notes" class="form-control" style="width:100%;"></textarea>
+            </div>
+            <button type="submit" class="btn btn-success float-right mx-1">Invia ordine</button>
+        </div>
+    </div>
+</form>

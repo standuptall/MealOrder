@@ -1,0 +1,41 @@
+﻿
+@{
+    ViewBag.Title = "View";
+}
+@using BillMealMVC.Extensions
+<h1>Lista prodotti</h1>
+<div class="row">
+    <div class="col-md-2">
+
+    </div>
+    <div class="col-md-10 products">
+        @foreach (BillMealMVC.Models.Item item in Model)
+        {
+            <div class="p-1 thumb-frame mr-1 float-left">
+                
+                    <div class="thumb-header">
+                        @{
+                            var img = "/imgs/" + (item.ItemId) + ".jpg";
+                            if (!File.Exists(System.Configuration.ConfigurationManager.AppSettings["imagepath"] + "\\" + img))
+                            {
+                                img = "/imgs/noimage.jpg";
+                            }
+                        }
+                        <div class="thumb " style="background-image:url('@img')">
+                            @Html.Price(item);
+                        </div>
+                    </div>
+                    <div class="thumb-foot">
+                        <a href="/admin/edit?id=@item.ItemId"><h4>@item.Name</h4></a>
+                        <div class="p-1 row">
+                            <div class="col-md-9"><span class="description">@item.Description</span> </div>
+
+                            <div class="col-md-3"><a class="btn btn-success add-to-cart" href="/products/addtocart?id=@(item.ItemId)"><img class="add-to-cart-image" src="~/imgs/add-to-cart-s.png" /></a></div>
+                            
+                        </div>
+                    </div>
+
+            </div>
+        }
+    </div>
+</div>

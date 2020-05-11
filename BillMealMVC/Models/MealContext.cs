@@ -1,0 +1,19 @@
+﻿using BillMealMVC.Models;
+using System;
+using System.Collections.Generic;
+using System.Data.Entity;
+using System.Linq;
+using System.Web;
+
+namespace BillMealMVC.Model
+{
+    public class MealContext : DbContext
+    {
+        public MealContext() : base("MealContext")
+        {
+        }
+        public DbSet<CartHead> Cart { get; set; }
+        public DbSet<Item> Items { get; set; }
+        public DbSet<ItemCategory> ItemCategories { get; set; }
+    }
+}
