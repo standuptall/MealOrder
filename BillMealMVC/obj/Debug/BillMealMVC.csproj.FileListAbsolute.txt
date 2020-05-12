@@ -133,3 +133,4 @@ C:\Alberto\testwebform\BillMealMVC\BillMealMVC\obj\Debug\BillMealMVC.Migrations.
 C:\Alberto\testwebform\BillMealMVC\BillMealMVC\obj\Debug\BillMealMVC.Migrations.confirmedtotal.resources
 C:\Alberto\testwebform\BillMealMVC\BillMealMVC\obj\Debug\BillMealMVC.Migrations.deliverydate.resources
 C:\Alberto\testwebform\BillMealMVC\BillMealMVC\obj\Debug\BillMealMVC.Migrations.deliverydate1.resources
+C:\Alberto\testwebform\BillMealMVC\BillMealMVC\obj\Debug\BillMealMVC.Migrations.canceledeamilsent.resources

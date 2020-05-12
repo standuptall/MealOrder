@@ -35,7 +35,13 @@ namespace BillMealMVC.Controllers
             var ora_chiusura = 21;
             var ora_now = DateTime.Now.Hour;
             var collection = new List<string[]>();
-            var start = (double)(ora_now > ora_apertura ? ora_now : ora_apertura);
+            double start = 0;
+            if (ora_now >= ora_apertura && ora_now <= ora_chiusura)
+                start = ora_now;
+            else if (ora_now > ora_chiusura)
+                start = ora_apertura;
+            else if (ora_now < ora_apertura)
+                start = ora_apertura;
             start += Math.Ceiling((double)DateTime.Now.Minute / 60);
             for (double i = start; i < ora_chiusura; i += 0.25)
             {

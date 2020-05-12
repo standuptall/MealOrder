@@ -20,5 +20,7 @@ namespace BillMealMVC.Models
         public string Phone { get; set; }
         public DateTime? DeliveryDate { get; set; }
         public double ConfirmedTotal { get; set; }
+        public bool Canceled { get; set; }
+        public bool EmailSent { get; set; }
     }
 }

@@ -8,6 +8,8 @@ using System.Data.Entity;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Net;
+using System.Net.Mail;
 using System.Runtime.InteropServices;
 using System.Web;
 using System.Web.Mvc;
@@ -102,6 +104,66 @@ namespace BillMealMVC.Controllers
                 .Include(c=>c.Items)
                 .FirstOrDefault();
             return View(order);
+        }
+        [Authorize]
+        public JsonResult SendEmail(int id)
+        {
+            var order = context.Cart.Where(c => c.CartId == id)
+                .Include(c => c.Items)
+                .FirstOrDefault();
+            var template = @"
+<div>
+<h2>Il tuo ordine è stato confermato.</h2>
+<li>";
+            foreach (var item in order.Items)
+            {
+                template += "<ul>" + item.ItemName + "</ul>";
+            }
+            template += @"
+</li>
+<p>Totale: " + Utils.FormatPrice(order.ConfirmedTotal) + @"</p>
+</div>
+";
+            try
+            {
+                MailMessage mailMessage = new MailMessage();
+                mailMessage.To.Add(order.Email);
+                mailMessage.From = new MailAddress("noreply@italianburgerpavia.it");
+                mailMessage.Subject = "Il tuo ordine è stato confermato";
+                mailMessage.Body = template;
+                mailMessage.IsBodyHtml = true;
+                SmtpClient smtpClient = new SmtpClient("smtp.your-isp.com");
+
+
+                smtpClient.DeliveryMethod = SmtpDeliveryMethod.Network;
+                smtpClient.UseDefaultCredentials = false;
+                smtpClient.EnableSsl = true;
+                smtpClient.Host = "smtp.gmail.com";
+                smtpClient.Port = 587;
+                //smtpClient.Send(mailMessage);
+            }
+            catch (Exception ex)
+            {
+                Response.StatusCode = 500;
+                return Json("ops");
+            }
+            order.EmailSent = true;
+            context.SaveChanges();
+            return Json(new { message = "ok" }, JsonRequestBehavior.AllowGet);
+
+
+        }
+        public JsonResult Cancel(int id)
+        {
+            var order = context.Cart.Where(c => c.CartId == id)
+                .Include(c => c.Items)
+                .FirstOrDefault();
+            
+            order.Canceled = true;
+            context.SaveChanges();
+            return Json(new { message = "ok" }, JsonRequestBehavior.AllowGet);
+
+
         }
     }
 }

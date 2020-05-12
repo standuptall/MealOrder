@@ -7,6 +7,30 @@
 <h2>ViewOrder</h2>
 
 <div class="container">
+    <div class="d-flex flex-row-reverse bd-highlight">
+        <div class="p-2 bd-highlight">
+            <button type="button" class="btn btn-danger"  @(Model.Canceled ? "disabled" : "") id="buttoncancel" data-toggle="modal" data-target="#mdlconfermaannulla">
+                Annulla ordine
+            </button>
+        </div>
+        <div class="p-2 bd-highlight">
+            <button type="button" class="btn btn-success" @(Model.Canceled ? "disabled" : "") id="buttonsend" data-toggle="modal" data-target="#mdlconfermainvio">
+                @(Model.EmailSent ? "Invia di nuovo e-mail" : "Invia e-mail di conferma")
+            </button>
+        </div>
+
+
+    </div>
+    @*<div class="row">
+            <div class="navbar navbar-right justify-content-between">
+                <ul class="navbar-nav mr-2">
+                    <a class="btn btn-danger" href="#">Annulla</a>
+                </ul>
+                <ul class="navbar-nav ">
+                    <a class="btn btn-success" href="#">Conferma</a>
+                </ul>
+            </div>
+        </div>*@
     <div class="row">
         <div class="col-md-6">
             <div class="card">
@@ -74,6 +98,79 @@
                         </tfoot>
                     </table>
                 </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    function sendEmail() {
+        $('#buttonsend').addClass("disabled");
+        $('#mdlconfermainvio').modal('hide');
+        $.ajax({
+            type: "get",
+
+            url: "/admin/sendemail?id="+@Model.CartId,
+            success: function (data, stato) {
+                toastr.success("E-mail inviata con successo");
+            },
+            error: function (richiesta, stato, errori) {
+                toastr.error("Si è verificato un errore");
+            }
+        });
+    }
+    function cancelOrder() {
+        $('#buttoncancel').addClass("disabled");
+        $('#buttonsend').addClass("disabled");
+        $('#mdlconfermaannulla').modal('hide');
+        $.ajax({
+            type: "get",
+
+            url: "/admin/cancel?id="+@Model.CartId,
+            success: function (data, stato) {
+                toastr.success("Ordine annullato");
+            },
+            error: function (richiesta, stato, errori) {
+                toastr.error("Si è verificato un errore");
+            }
+        });
+    }
+</script>
+
+
+<div class="modal" id="mdlconfermainvio" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Invia e-mail di conferma</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Sei sicuro di voler inviare la mail di conferma?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-success" onclick="sendEmail()">Invia</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Annulla</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal" id="mdlconfermaannulla" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Annulla ordine</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Sei sicuro di voler annullare l'ordine?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-success" onclick="cancelOrder()">Annulla ordine</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Annulla operazione</button>
             </div>
         </div>
     </div>
