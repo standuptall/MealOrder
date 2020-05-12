@@ -2,6 +2,79 @@
 @{
     ViewBag.Title = "ViewOrder";
 }
+@model BillMealMVC.Models.CartHead
 
 <h2>ViewOrder</h2>
 
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">
+                    Informazioni di contatto
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">E-mail</h5>
+                    <p class="card-text">@Model.Email</p>
+
+                    <h5 class="card-title">Telefono</h5>
+                    <p class="card-text">@Model.Phone</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">
+                    Dati Ordine
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">Data di consegna</h5>
+                    <p class="card-text">@Model.DeliveryDate.Value.ToString("dddd dd MMMM HH:mm")</p>
+                    <h5 class="card-title">Note</h5>
+                    <p class="card-text">@Model.Notes</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row mt-2">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    Contenuto Ordine
+                </div>
+                <div class="card-body">
+                    <table class="table">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th>Prodotto</th>
+                                <th>Quantità</th>
+                                <th>Prezzo</th>
+                            </tr>
+                        </thead>
+                        @{
+                            var totale = 0.0;
+                        }
+                        <tbody>
+                            @foreach (BillMealMVC.Models.CartRows row in Model.Items)
+                            {
+                                <tr>
+                                    <td><img class="cart-thumbnail" src="~/imgs/@(row.ItemId).jpg" />@row.ItemName</td>
+                                    <td><input class="form-control" style="width:100px;" value="@row.Quantity" type="number" name="Quantity" onchange="cart_reload(@(row.CartRowId),this)" /></td>
+                                    <td>@Utils.FormatPrice(row.ItemPrice)</td>
+                                </tr>
+                                totale += (row.ItemPrice * row.Quantity);
+                            }
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <th>Totale: @Utils.FormatPrice(totale)</th>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

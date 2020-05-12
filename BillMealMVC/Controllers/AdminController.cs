@@ -4,6 +4,7 @@ using Microsoft.Ajax.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Data.Entity;
 using System.Globalization;
 using System.IO;
 using System.Linq;
@@ -19,7 +20,6 @@ namespace BillMealMVC.Controllers
         // GET: Admin
         public AdminController():base()
         {
-            ViewBag.AppName = "Italian Burger Pavia";
         }
         [Authorize]
         public ActionResult Index()
@@ -98,7 +98,9 @@ namespace BillMealMVC.Controllers
          [Authorize]
          public ActionResult ViewOrder(int id)
         {
-            var order = context.Cart.Where(c => c.CartId == id).FirstOrDefault();
+            var order = context.Cart.Where(c => c.CartId == id)
+                .Include(c=>c.Items)
+                .FirstOrDefault();
             return View(order);
         }
     }

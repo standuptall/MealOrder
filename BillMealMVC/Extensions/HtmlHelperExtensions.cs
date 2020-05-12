@@ -143,5 +143,44 @@ namespace BillMealMVC.Extensions
             bd.Append(divint.ToString(TagRenderMode.EndTag));
             return MvcHtmlString.Create(bd.ToString());
         }
+        public static IHtmlString PrintItemsTable(this HtmlHelper htmlHelper, CartHead cart)
+        {
+            //        < table class="table">
+            //            <thead class="thead-dark">
+            //                <tr>
+            //                    <th>Prodotto</th>
+            //                    <th>Quantità</th>
+            //                    <th>Prezzo</th>
+            //                </tr>
+            //            </thead>
+            //            @{
+            //                var totale = 0.0;
+            //}
+            //            <tbody>
+            //                @foreach(BillMealMVC.Models.CartRows row in Model.Items)
+            //{
+            //                    < tr >
+            //                        < td >< img class="cart-thumbnail" src="~/imgs/@(row.ItemId).jpg" />@row.ItemName</td>
+            //                        <td><input class="form-control" style="width:100px;" value="@row.Quantity" type="number" name="Quantity" onchange="cart_reload(@(row.CartRowId),this)" /></td>
+            //                        <td>@Utils.FormatPrice(row.ItemPrice)</td>
+            //                    </tr>
+            //                    totale += (row.ItemPrice* row.Quantity);
+            //                }
+            //            </tbody>
+            //            <tfoot>
+            //                <tr>
+            //                    <td></td>
+            //                    <td></td>
+            //                    <th>Totale: @Utils.FormatPrice(totale)</th>
+            //                </tr>
+            //            </tfoot>
+            //        </table>
+            var table = new TagBuilder("table");
+            table.AddCssClass("table");
+            var thead = new TagBuilder("thead");
+            thead.AddCssClass("thead-dark");
+            var rowhead = new TagBuilder("tr");
+            throw new NotImplementedException();
+        }
     }
 }

@@ -27,7 +27,7 @@
                             <td><input class="form-control" style="width:100px;" value="@row.Quantity" type="number" name="Quantity" onchange="cart_reload(@(row.CartRowId),this)" /></td>
                             <td>@Utils.FormatPrice(row.ItemPrice)</td>
                         </tr>
-                        totale += (row.ItemPrice*row.Quantity);
+                        totale += (row.ItemPrice * row.Quantity);
                     }
                 </tbody>
                 <tfoot>
