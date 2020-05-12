@@ -17,24 +17,30 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
+                <li class="nav-item">
                     <a class="nav-link" href="/Products?cat=1">Panini</a>
                 </li>
-                <li>
-                    <a class="nav-link" href="/Products?cat=2">Caffetteria</a>
+                <li class="nav-item">
+                    <a class="nav-link" href="/Products?cat=3">Caffetteria</a>
                 </li>
-                <li>
-                    <a class="nav-link" href="/Products?cat=3">Bibite</a>
+                <li class="nav-item">
+                    <a class="nav-link" href="/Products?cat=2">Bibite</a>
                 </li>
                 @if (HttpContext.Current.User.Identity.IsAuthenticated)
                 {
 
-                    <li class="nav-item">
-                        <a class="nav-link" href="/Admin">
-                            Admin @if (ViewBag.Title == "Admin")
-                            {<span class="sr-only">(current)</span>}
-                        </a>
-                    </li>
+                <li class="nav-item">
+                    <div class="nav-link dropdown show ">
+                        <button class="btn btn-sm btn-dark dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Admin
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item" href="/Admin/Products">Gestisci prodotti</a>
+                            <a class="dropdown-item" href="/Admin/Orders">Gestisci ordini</a>
+                            <a class="dropdown-item" href="/Admin/Categories">Gestisci categorie</a>
+                        </div>
+                    </div>
+                </li>
                 }
             </ul>
             @Html.Partial("_LoginPartial")
@@ -43,11 +49,11 @@
     <div class="container-fluid body-content">
         @RenderBody()
         <hr />
-        <footer class="footer">
-            <p>&copy; @DateTime.Now.Year - MealOrder</p>
-        </footer>
     </div>
 
+    <footer class="footer bg-dark text-light">
+        <p>&copy; @DateTime.Now.Year - MealOrder</p>
+    </footer>
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @Scripts.Render("~/bundles/script")
@@ -57,9 +63,9 @@
     <script type="text/javascript">
         /* Edit product -->
         */
-                    //function img_onclick() {
-                    //$('#file-input').click();
-                    //}
+                        //function img_onclick() {
+                        //$('#file-input').click();
+                        //}
         /* Edit product <-- */
     </script>
 </body>

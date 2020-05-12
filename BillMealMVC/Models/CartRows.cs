@@ -12,8 +12,11 @@ namespace BillMealMVC.Models
         public int CartRowId { get; set; }
         public int? CartId { get; set; }
         public CartHead CartHead { get; set; }
-        public int ItemId { get; set; }
+        public int? ItemId { get; set; }
         public virtual Item Item { get; set; }
+        public string ItemName { get; set; }
+        public string ItemDescription { get; set; }
+        public double ItemPrice { get; set; }
         public double Quantity { get; set; }
 
     }

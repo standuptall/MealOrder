@@ -64,7 +64,10 @@ namespace BillMealMVC.Controllers
                 cartrow = new CartRows
                 {
                     Quantity = 1,
-                    Item = item
+                    Item = item,
+                     ItemDescription = item.Description,
+                     ItemName = item.Name,
+                      ItemPrice = Utils.GetPrice(item)
                 };
                 cartHead.Items.Add(cartrow);
             }

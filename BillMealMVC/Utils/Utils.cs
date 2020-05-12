@@ -1,6 +1,8 @@
-﻿using BillMealMVC.Models;
+﻿using BillMealMVC.Model;
+using BillMealMVC.Models;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Globalization;
 using System.Linq;
 using System.Web;
@@ -17,6 +19,22 @@ namespace BillMealMVC
             newprice = Math.Round(newprice, 2);
             return newprice;
 
+        }
+        public static CartHead GetCart(MealContext context,HttpRequestBase request)
+        {
+            var cook = request.Cookies.Get("meal_id");
+            if (cook != null)
+            {
+                var cart = context.Cart.Where(c => c.meal_id == cook.Value)
+                    .Include(c => c.Items)
+                    .FirstOrDefault();
+                return cart;
+            }
+            return null;
+        }
+        public static string FormatPrice(double price)
+        {
+            return Math.Round(price, 2).ToString("C");
         }
     }
 }

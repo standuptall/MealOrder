@@ -189,6 +189,10 @@
     <Compile Include="Migrations\202005110636281_cartheat.Designer.cs">
       <DependentUpon>202005110636281_cartheat.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202005111657266_nuovi campi itemrow.cs" />
+    <Compile Include="Migrations\202005111657266_nuovi campi itemrow.Designer.cs">
+      <DependentUpon>202005111657266_nuovi campi itemrow.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\CartHead.cs" />
@@ -272,10 +276,12 @@
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Products\Index.cshtml" />
-    <Content Include="Views\Admin\Index.cshtml" />
+    <Content Include="Views\Admin\Products.cshtml" />
     <Content Include="Views\Admin\Edit.cshtml" />
     <Content Include="Views\Checkout\Index.cshtml" />
     <Content Include="Views\Checkout\Success.cshtml" />
+    <Content Include="Views\Admin\Orders.cshtml" />
+    <Content Include="Views\Admin\Categories.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -299,6 +305,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202005110636281_cartheat.resx">
       <DependentUpon>202005110636281_cartheat.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202005111657266_nuovi campi itemrow.resx">
+      <DependentUpon>202005111657266_nuovi campi itemrow.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

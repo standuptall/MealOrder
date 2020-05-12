@@ -129,3 +129,4 @@ C:\Alberto\testwebform\BillMealMVC\BillMealMVC\bin\WebActivatorEx.dll
 C:\Alberto\testwebform\BillMealMVC\BillMealMVC\obj\Debug\BillMealMVC.Migrations.m.resources
 C:\Alberto\testwebform\BillMealMVC\BillMealMVC\obj\Debug\BillMealMVC.csproj.GenerateResource.cache
 C:\Alberto\testwebform\BillMealMVC\BillMealMVC\obj\Debug\BillMealMVC.Migrations.cartheat.resources
+C:\Alberto\testwebform\BillMealMVC\BillMealMVC\obj\Debug\BillMealMVC.Migrations.nuovicampiitemrow.resources

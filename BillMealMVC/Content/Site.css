@@ -8,6 +8,7 @@
     padding-right: 15px;
     background-image: url('/imgs/background.jpg');
     background-attachment: fixed;
+    min-height: 100vh;
 }
 
 /* Override the default bootstrap behavior where horizontal description lists 
@@ -119,6 +120,13 @@
     height: auto;
 }
 .footer{
-    position:sticky;
     margin-bottom:0px;
+}
+
+footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
 }

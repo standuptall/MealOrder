@@ -18,34 +18,39 @@ namespace BillMealMVC.Controllers
             {
                 return OnPost();
             }
-            CartHead cart = null;
-            var meal_id = Request.Cookies.Get("meal_id");
-            if (meal_id != null)
+            var cart = Utils.GetCart(context,Request);
+            if (cart.Items.Count == 0)
+                return Redirect("/Products");
+            var ora_apertura = 7;
+            var ora_chiusura = 21;
+            var ora_now = DateTime.Now.Hour;
+            var collection = new List<string[]>();
+            var start = (ora_now > ora_apertura ? ora_now : ora_apertura);
+            for(double i = start; i < ora_chiusura; i += 0.25)
             {
-                cart = context.Cart
-                    .Where(c => c.meal_id == meal_id.Value)
-                    .Include(c=>c.Items)
-                    .FirstOrDefault();
+                var ore = Math.Floor(i);
+                var minuti = (i - ore) * 60;
+                collection.Add(new string[] { ore.ToString("00") + minuti.ToString("00"),ore.ToString("00")+":"+minuti.ToString("00") });
             }
+            ViewBag.Deliveries = collection;
             return View(cart);
         }
         public ActionResult review(int id,int qty)
         {
-            CartHead cart = null;
-            var meal_id = Request.Cookies.Get("meal_id");
-            if (meal_id != null)
-            {
-                cart = context.Cart
-                    .Where(c => c.meal_id == meal_id.Value)
-                    .Include(c => c.Items)
-                    .FirstOrDefault();
+            var cart = Utils.GetCart(context, Request);
+            if (cart != null) { 
                 var item = cart.Items.Where(c => c.CartRowId == id).FirstOrDefault();
                 if (item != null)
                 {
                     if (qty <= 0)
+                    {
                         cart.Items.Remove(item);
+                        context.Entry(item).State = EntityState.Deleted;
+                    }
                     else
+                    {
                         item.Quantity = qty;
+                    }
                     context.SaveChanges();
                 }
             }
@@ -55,20 +60,13 @@ namespace BillMealMVC.Controllers
         [HttpPost]
         public ActionResult OnPost()
         {
-            CartHead cart = null;
-            var meal_id = Request.Cookies.Get("meal_id");
-            if (meal_id == null)
-            {
-            }
-            cart = context.Cart
-                .Where(c => c.meal_id == meal_id.Value)
-                .Include(c => c.Items)
-                .FirstOrDefault();
+            var cart = Utils.GetCart(context, Request);
             var Notes = HttpContext.Request.Form["Notes"];
             var Email = HttpContext.Request.Form["Email"];
             var Phone = HttpContext.Request.Form["Phone"];
-            var DeliveryHour = int.Parse(HttpContext.Request.Form["DeliveryHour"]);
-            var DeliveryMinute = int.Parse(HttpContext.Request.Form["DeliveryMinute"]);
+            var delivery = HttpContext.Request.Form["deliverytime"];
+            var DeliveryHour = int.Parse(delivery.Substring(0, 2));
+            var DeliveryMinute = int.Parse(delivery.Substring(2, 2));
 
             if (cart != null)
             {

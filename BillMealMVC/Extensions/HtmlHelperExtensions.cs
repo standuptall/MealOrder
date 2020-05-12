@@ -2,6 +2,7 @@
 using BillMealMVC.Models;
 using System;
 using System.Data.Entity;
+using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
 using System.Net.Mime;
@@ -9,6 +10,8 @@ using System.Text;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Mvc.Html;
+using System.Web.Services.Description;
+using System.Web.UI.HtmlControls;
 
 namespace BillMealMVC.Extensions
 {
@@ -55,22 +58,90 @@ namespace BillMealMVC.Extensions
         public static IHtmlString CartNumberOfItems(this HtmlHelper htmlHelper, HttpRequestBase request)
         {
             var context = new MealContext();
-            var cook = request.Cookies.Get("meal_id");
+            var cart = Utils.GetCart(context, request);
             double number = 0;
-            if (cook != null)
-            {
-                var cart = context.Cart.Where(c => c.meal_id == cook.Value)
-                    .Include(c=>c.Items)
-                    .FirstOrDefault();
-                if (cart != null)
-                    number = cart.Items.Select(c => c.Quantity).Sum();
-            }
+            if (cart != null)
+                number = cart.Items.Select(c => c.Quantity).Sum();
             var divprice = new TagBuilder("span");
             divprice.AddCssClass("badge badge-light");
             divprice.InnerHtml = ((int)number).ToString();
             var html = divprice.ToString(TagRenderMode.Normal);
 
             return MvcHtmlString.Create(html);
+        }
+        public static IHtmlString CartPreview(this HtmlHelper htmlHelper, HttpRequestBase request)
+        {
+            //    < div class="btn-group">
+            //    <form class="p-4">
+            //        <div class="dropdown-menu dropdown-menu-right p-4">
+            //            <div class="row">
+            //                <div class="col-md-6">Panino e panelle</div>
+            //                <div class="col-md-6"><input type = "number" class="form-control" value="2" /></div>
+            //            </div>
+            //            <div class="dropdown-divider"></div>
+            //            <div class="row">
+            //                <div class="col-md-6">Coca cola</div>
+            //                <div class="col-md-6"><input type = "number" class="form-control" value="2" onchange="cart_reload(1,this)" /></div>
+            //            </div>
+            //            <div class="dropdown-divider"></div>
+            //        </div>
+            //    </form>
+            //</div>
+            var context = new MealContext();
+            var cart = Utils.GetCart(context, request);
+            var bd = new StringBuilder();
+            var divext = new TagBuilder("div");
+            divext.AddCssClass("btn-group");
+            var form = new TagBuilder("div");
+            form.Attributes.Add("style", "font-size:smaller!important;");
+            form.AddCssClass("p-2");
+            var divint = new TagBuilder("div");
+            divint.AddCssClass("dropdown-menu dropdown-menu-right p-4");
+            bd.Append(divext.ToString(TagRenderMode.StartTag));
+            bd.Append(form.ToString(TagRenderMode.StartTag));
+            bd.Append(divint.ToString(TagRenderMode.StartTag));
+            if (cart == null || cart?.Items.Count == 0)
+                bd.Append("<div class=\"row\"><small>Nessun prodotto</small></div>");
+            else
+            {
+                var tb = "<table class=\"table table-borderless\">";
+                tb += "<thead>";
+                tb += "<tr>";
+                tb += "<th scope=\"col\">Prodotto</th>";
+                tb += "<th scope=\"col\">Quantità</th>";
+                tb += "</tr></thead><tbody>";
+
+                foreach (var row in cart.Items)
+                {
+                    tb += "<tr>";
+                    tb += "<td>"+row.ItemName+"</td>";
+                    tb += "<td>" + row.Quantity.ToString(CultureInfo.InvariantCulture) + "</td>";
+                    tb += "</tr>";
+                    //var divrow = new TagBuilder("div");
+                    //divrow.AddCssClass("row");
+                    //var col1 = new TagBuilder("div");
+                    //col1.AddCssClass("col-md-6");
+                    //col1.InnerHtml = "<small>"+row.ItemName+"</small>";
+                    //var col2 = new TagBuilder("div");
+                    //col2.AddCssClass("col-md-6");
+                    //var input = new TagBuilder("input");
+                    //input.AddCssClass("");
+                    //input.Attributes.Add("type", "number");
+                    //input.Attributes.Add("value", row.Quantity.ToString(CultureInfo.InvariantCulture));
+                    //input.Attributes.Add("onchange", "cart_reload(" + row.CartRowId + ", this)");
+                    //col2.InnerHtml = input.ToString(TagRenderMode.SelfClosing);
+                    //bd.Append(divrow.ToString(TagRenderMode.StartTag));
+                    //bd.Append(col1.ToString(TagRenderMode.Normal));
+                    //bd.Append(col2.ToString(TagRenderMode.Normal));
+                    //bd.Append(divrow.ToString(TagRenderMode.EndTag));
+                }
+                tb += "</tbody></table>";
+                bd.Append(tb);
+            }
+            bd.Append(divext.ToString(TagRenderMode.EndTag));
+            bd.Append(form.ToString(TagRenderMode.EndTag));
+            bd.Append(divint.ToString(TagRenderMode.EndTag));
+            return MvcHtmlString.Create(bd.ToString());
         }
     }
 }

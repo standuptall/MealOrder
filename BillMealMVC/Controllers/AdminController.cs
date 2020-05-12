@@ -20,11 +20,29 @@ namespace BillMealMVC.Controllers
         [Authorize]
         public ActionResult Index()
         {
+            return Redirect("/admin/products");
+        }
+        
+        [Authorize]
+        public ActionResult Products()
+        {
             var categories = context.ItemCategories.ToList();
             ViewBag.Categories = categories;
             var items = context.Items.ToList();
             return View(items);
         }
+        [Authorize]
+        public ActionResult Orders()
+        {
+            return View();
+        }
+
+        [Authorize]
+        public ActionResult Categories()
+        {
+            return View();
+        }
+        [Authorize]
         public ActionResult Edit(int? id)
         {
             Item Item = null;
@@ -40,6 +58,7 @@ namespace BillMealMVC.Controllers
             return View(Item);
         }
         [HttpPost]
+        [Authorize]
         public ActionResult Edit()
         {
             var id = int.Parse(HttpContext.Request.Form["ItemId"]);

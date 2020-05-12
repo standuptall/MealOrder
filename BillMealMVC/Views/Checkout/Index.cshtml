@@ -15,36 +15,54 @@
                     <th>Prezzo</th>
                 </tr>
             </thead>
+            @{ 
+                var totale = 0.0;
+            }
             <tbody>
                 @foreach (BillMealMVC.Models.CartRows row in Model.Items)
                 {
                     <tr>
-                        <th><img class="cart-thumbnail" src="~/imgs/@(row.ItemId).jpg" />@row.Item.Name</th>
-                        <th><input class="form-control" style="width:100px;" value="@row.Quantity" type="number" name="Quantity" onchange="cart_reload(@(row.CartRowId),this)" /></th>
-                        <th>@Utils.GetPrice(row.Item)</th>
+                        <td><img class="cart-thumbnail" src="~/imgs/@(row.ItemId).jpg" />@row.ItemName</td>
+                        <td><input class="form-control" style="width:100px;" value="@row.Quantity" type="number" name="Quantity" onchange="cart_reload(@(row.CartRowId),this)" /></td>
+                        <td>@Utils.FormatPrice(row.ItemPrice)</td>
                     </tr>
+                    totale += row.ItemPrice;
                 }
             </tbody>
+            <tfoot>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <th>Totale: @Utils.FormatPrice(totale)</th>
+                </tr>
+            </tfoot>
         </table>
         <div class="container">
-            <div class="form-group ">
-                <label for="email" class="success">Ora di consegna</label>
-                <input type="number" name="DeliveryHour" id="DeliveryHour" class="form-control" />
-                <input type="number" name="DeliveryMinute" id="DeliveryMinute" class="form-control" />
+            <div class="mx-auto col-md-4">
+                <div class="form-group " style="width:7em;">
+                    <label for="deliverytime" class="success">Ora di consegna</label>
+                    <select name="deliverytime" id="deliverytime" class="form-control">
+                        @foreach (string[] del in ViewBag.Deliveries)
+                        {
+                            <option value="@del[0]">@del[1]</option>
+                        }
+
+                    </select>
+                </div>
+                <div class="form-group ">
+                    <label for="email" class="success">E-mail</label>
+                    <input type="email" name="email" id="email" class="form-control" style="width:100%;" />
+                </div>
+                <div class="form-group ">
+                    <label for="phone" class="success">Numero di telefono</label>
+                    <input type="number" name="Phone" id="Phone" class="form-control" style="width:100%;" />
+                </div>
+                <div class="form-group ">
+                    <label for="Notes" class="success">Inserisci note aggiuntive all'ordine (es. ingredienti +/-)</label>
+                    <textarea rows="3" name="Notes" id="Notes" class="form-control" style="width:100%;"></textarea>
+                </div>
+                <button type="submit" class="btn btn-success float-right mx-1">Invia ordine</button>
             </div>
-            <div class="form-group ">
-                <label for="email" class="success">E-mail</label>
-                <input type="email" name="email" id="email" class="form-control" style="width:100%;" />
-            </div>
-            <div class="form-group ">
-                <label for="phone" class="success">Numero di telefono</label>
-                <input type="number" name="Phone" id="Phone" class="form-control" style="width:100%;" />
-            </div>
-            <div class="form-group ">
-                <label for="Notes" class="success">Inserisci note aggiuntive all'ordine (es. ingredienti +/-)</label>
-                <textarea rows="3" name="Notes" id="Notes" class="form-control" style="width:100%;"></textarea>
-            </div>
-            <button type="submit" class="btn btn-success float-right mx-1">Invia ordine</button>
         </div>
     </div>
 </form>
