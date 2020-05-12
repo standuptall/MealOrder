@@ -130,3 +130,9 @@ footer {
     width: 100%;
     text-align: center;
 }
+.clickable-row{
+    cursor:pointer;
+}
+.clickable-row:hover{
+    background-color:cadetblue!important;
+}

@@ -2,6 +2,29 @@
 @{
     ViewBag.Title = "Orders";
 }
-
+<style type="text/css">
+    .nav-tabs .nav-item .nav-link {
+        color:black;
+    }
+</style>
 <h2>Orders</h2>
 
+<ul class="nav nav-tabs">
+    <li class="nav-item active"><a class="nav-link active" aria-selected="true" data-toggle="tab" href="#chiusi">Ordini chiusi</a></li>
+    <li class="nav-item"><a class="nav-link"  data-toggle="tab"aria-selected="false"  href="#aperti">Ordini in corso/abbandonati</a></li>
+</ul>
+
+<div class="tab-content">
+    <div id="chiusi" class="tab-pane fade-in active">
+        <div class="container">
+            <h3>Ordini chiusi</h3>
+            @Html.Partial("OrderList",(List<BillMealMVC.Models.CartHead>) ViewBag.Closed)
+        </div>
+    </div>
+    <div id="aperti" class="tab-pane fade">
+        <div class="container">
+            <h3>Ordini in corso/abbandonati</h3>
+            @Html.Partial("OrderList", (List<BillMealMVC.Models.CartHead>)ViewBag.Open)
+        </div>
+    </div>
+</div>

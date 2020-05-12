@@ -9,9 +9,14 @@ using System.Web.Mvc;
 
 namespace BillMealMVC.Controllers
 {
-    public class ProductsController : Controller
+    public class ProductsController : BaseController
     {
         MealContext context = new MealContext();
+
+        public ProductsController() : base()
+        {
+
+        }
         public ActionResult Index(int? cat)
         {
             List<Item> items = null;

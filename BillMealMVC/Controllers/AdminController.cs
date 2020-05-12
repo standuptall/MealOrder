@@ -13,10 +13,14 @@ using System.Web.Mvc;
 
 namespace BillMealMVC.Controllers
 {
-    public class AdminController : Controller
+    public class AdminController :  BaseController
     {
         MealContext context = new MealContext();
         // GET: Admin
+        public AdminController():base()
+        {
+            ViewBag.AppName = "Italian Burger Pavia";
+        }
         [Authorize]
         public ActionResult Index()
         {
@@ -34,6 +38,10 @@ namespace BillMealMVC.Controllers
         [Authorize]
         public ActionResult Orders()
         {
+            var closed = context.Cart.Where(c=>c.Closed).OrderByDescending(c=>c.CreationDate).ToList();
+            var open = context.Cart.Where(c => !c.Closed).OrderByDescending(c => c.CreationDate).ToList();
+            ViewBag.Closed = closed;
+            ViewBag.Open = open;
             return View();
         }
 
@@ -86,6 +94,12 @@ namespace BillMealMVC.Controllers
                 }
             }
             return Redirect("/Admin");
+        }
+         [Authorize]
+         public ActionResult ViewOrder(int id)
+        {
+            var order = context.Cart.Where(c => c.CartId == id).FirstOrDefault();
+            return View(order);
         }
     }
 }

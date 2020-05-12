@@ -130,3 +130,6 @@ C:\Alberto\testwebform\BillMealMVC\BillMealMVC\obj\Debug\BillMealMVC.Migrations.
 C:\Alberto\testwebform\BillMealMVC\BillMealMVC\obj\Debug\BillMealMVC.csproj.GenerateResource.cache
 C:\Alberto\testwebform\BillMealMVC\BillMealMVC\obj\Debug\BillMealMVC.Migrations.cartheat.resources
 C:\Alberto\testwebform\BillMealMVC\BillMealMVC\obj\Debug\BillMealMVC.Migrations.nuovicampiitemrow.resources
+C:\Alberto\testwebform\BillMealMVC\BillMealMVC\obj\Debug\BillMealMVC.Migrations.confirmedtotal.resources
+C:\Alberto\testwebform\BillMealMVC\BillMealMVC\obj\Debug\BillMealMVC.Migrations.deliverydate.resources
+C:\Alberto\testwebform\BillMealMVC\BillMealMVC\obj\Debug\BillMealMVC.Migrations.deliverydate1.resources

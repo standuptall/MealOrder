@@ -13,12 +13,12 @@ using BillMealMVC.Models;
 namespace BillMealMVC.Controllers
 {
     [Authorize]
-    public class AccountController : Controller
+    public class AccountController : BaseController
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
 
-        public AccountController()
+        public AccountController() : base()
         {
         }
 

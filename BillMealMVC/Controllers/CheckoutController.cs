@@ -9,31 +9,41 @@ using System.Web.Mvc;
 
 namespace BillMealMVC.Controllers
 {
-    public class CheckoutController : Controller
+    public class CheckoutController  : BaseController
     {
-        MealContext context = new MealContext();
+        MealContext context = new MealContext(); 
+        public CheckoutController() : base()
+        {
+
+        }
         public ActionResult Index()
         {
             if (Request.HttpMethod.ToLower()== "post")
             {
-                return OnPost();
+                return Confirm();
             }
             var cart = Utils.GetCart(context,Request);
             if (cart.Items.Count == 0)
                 return Redirect("/Products");
+            LoadDeliveries();
+            return View(cart);
+        }
+        private void LoadDeliveries()
+        {
+
             var ora_apertura = 7;
             var ora_chiusura = 21;
             var ora_now = DateTime.Now.Hour;
             var collection = new List<string[]>();
-            var start = (ora_now > ora_apertura ? ora_now : ora_apertura);
-            for(double i = start; i < ora_chiusura; i += 0.25)
+            var start = (double)(ora_now > ora_apertura ? ora_now : ora_apertura);
+            start += Math.Ceiling((double)DateTime.Now.Minute / 60);
+            for (double i = start; i < ora_chiusura; i += 0.25)
             {
                 var ore = Math.Floor(i);
                 var minuti = (i - ore) * 60;
-                collection.Add(new string[] { ore.ToString("00") + minuti.ToString("00"),ore.ToString("00")+":"+minuti.ToString("00") });
+                collection.Add(new string[] { ore.ToString("00") + minuti.ToString("00"), ore.ToString("00") + ":" + minuti.ToString("00") });
             }
             ViewBag.Deliveries = collection;
-            return View(cart);
         }
         public ActionResult review(int id,int qty)
         {
@@ -54,11 +64,11 @@ namespace BillMealMVC.Controllers
                     context.SaveChanges();
                 }
             }
-
+            LoadDeliveries();
             return View("Index",cart);
         }
         [HttpPost]
-        public ActionResult OnPost()
+        public ActionResult Confirm()
         {
             var cart = Utils.GetCart(context, Request);
             var Notes = HttpContext.Request.Form["Notes"];
@@ -73,16 +83,21 @@ namespace BillMealMVC.Controllers
                 cart.Notes = Notes;
                 cart.Email = Email;
                 cart.Phone = Phone;
-                cart.DeliveryHour = DeliveryHour;
-                cart.DeliveryMinute = DeliveryMinute;
+                var now = DateTime.Now;
+                cart.DeliveryDate = new DateTime(now.Year,now.Month,now.Day,DeliveryHour,DeliveryMinute,0);
                 cart.Closed = true;
                 cart.ClosedDate = DateTime.Now;
+                cart.ConfirmedTotal = cart.Items.Select(c => c.ItemPrice*c.Quantity).Sum();
                 context.SaveChanges();
-                Response.Cookies.Remove("meal_id");
+                Response.Cookies["meal_id"].Expires = DateTime.Now.AddDays(-1);
                 return View("Success",cart);
             }
 
             return Redirect("Products");
+        }
+        public ActionResult Success()
+        {
+            return View();
         }
     }
 }

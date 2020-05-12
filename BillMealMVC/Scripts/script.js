@@ -16,7 +16,11 @@ $(document).ready(function () {
     $('#cart_button').hover(mouseEnter, mouseLeave);
     $('#cart_button').click(function(){
         window.location.href = "/checkout"
-        });
+    });
+
+    $('.clickable-row').click(function () {
+        window.location = $(this).data("href");
+    });
 });
 function mouseEnter() {
     $('.dropdown-menu').dropdown('show');

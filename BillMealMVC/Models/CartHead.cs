@@ -18,7 +18,7 @@ namespace BillMealMVC.Models
         public string Notes { get; set; }
         public string Email { get; set; }
         public string Phone { get; set; }
-        public int DeliveryHour { get; set; }
-        public int DeliveryMinute { get; set; }
+        public DateTime? DeliveryDate { get; set; }
+        public double ConfirmedTotal { get; set; }
     }
 }

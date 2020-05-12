@@ -6,39 +6,41 @@
 <h2>@ViewBag.Title</h2>
 
 <form class="form" method="post" enctype="multipart/form-data" id="cart_form">
-    <div class="row">
-        <table class="table">
-            <thead class="thead-dark">
-                <tr>
-                    <th>Prodotto</th>
-                    <th>Quantità</th>
-                    <th>Prezzo</th>
-                </tr>
-            </thead>
-            @{ 
-                var totale = 0.0;
-            }
-            <tbody>
-                @foreach (BillMealMVC.Models.CartRows row in Model.Items)
-                {
+    <div class="row container mx-auto">
+        <div class="col-md-6">
+            <table class="table">
+                <thead class="thead-dark">
                     <tr>
-                        <td><img class="cart-thumbnail" src="~/imgs/@(row.ItemId).jpg" />@row.ItemName</td>
-                        <td><input class="form-control" style="width:100px;" value="@row.Quantity" type="number" name="Quantity" onchange="cart_reload(@(row.CartRowId),this)" /></td>
-                        <td>@Utils.FormatPrice(row.ItemPrice)</td>
+                        <th>Prodotto</th>
+                        <th>Quantità</th>
+                        <th>Prezzo</th>
                     </tr>
-                    totale += row.ItemPrice;
+                </thead>
+                @{
+                    var totale = 0.0;
                 }
-            </tbody>
-            <tfoot>
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <th>Totale: @Utils.FormatPrice(totale)</th>
-                </tr>
-            </tfoot>
-        </table>
-        <div class="container">
-            <div class="mx-auto col-md-4">
+                <tbody>
+                    @foreach (BillMealMVC.Models.CartRows row in Model.Items)
+                    {
+                        <tr>
+                            <td><img class="cart-thumbnail" src="~/imgs/@(row.ItemId).jpg" />@row.ItemName</td>
+                            <td><input class="form-control" style="width:100px;" value="@row.Quantity" type="number" name="Quantity" onchange="cart_reload(@(row.CartRowId),this)" /></td>
+                            <td>@Utils.FormatPrice(row.ItemPrice)</td>
+                        </tr>
+                        totale += (row.ItemPrice*row.Quantity);
+                    }
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <th>Totale: @Utils.FormatPrice(totale)</th>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+        <div class="col-md-6">
+            <div class="mx-auto col-md-10">
                 <div class="form-group " style="width:7em;">
                     <label for="deliverytime" class="success">Ora di consegna</label>
                     <select name="deliverytime" id="deliverytime" class="form-control">
