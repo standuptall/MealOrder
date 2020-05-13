@@ -5,8 +5,12 @@ using System.Web;
 
 namespace BillMealMVC.Models
 {
-    public class MealConfiguration
+    public class Settings
     {
+        public int Id { get; set; }
         public string AppName { get; set; }
+
+        public string UserEmail { get; set; }
+        public string PasswordEmail { get; set; }
     }
 }

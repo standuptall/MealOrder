@@ -36,13 +36,13 @@ namespace BillMealMVC.Controllers
             var ora_now = DateTime.Now.Hour;
             var collection = new List<string[]>();
             double start = 0;
-            if (ora_now >= ora_apertura && ora_now <= ora_chiusura)
+            if (ora_now > ora_apertura && ora_now < ora_chiusura)
                 start = ora_now;
-            else if (ora_now > ora_chiusura)
+            else if (ora_now >= ora_chiusura)
                 start = ora_apertura;
             else if (ora_now < ora_apertura)
                 start = ora_apertura;
-            start += Math.Ceiling((double)DateTime.Now.Minute / 60);
+            //start += Math.Ceiling((double)DateTime.Now.Minute / 60);
             for (double i = start; i < ora_chiusura; i += 0.25)
             {
                 var ore = Math.Floor(i);
@@ -76,21 +76,42 @@ namespace BillMealMVC.Controllers
         [HttpPost]
         public ActionResult Confirm()
         {
+            ViewBag.ErrorMessage = null;
+
             var cart = Utils.GetCart(context, Request);
             var Notes = HttpContext.Request.Form["Notes"];
             var Email = HttpContext.Request.Form["Email"];
             var Phone = HttpContext.Request.Form["Phone"];
             var delivery = HttpContext.Request.Form["deliverytime"];
-            var DeliveryHour = int.Parse(delivery.Substring(0, 2));
-            var DeliveryMinute = int.Parse(delivery.Substring(2, 2));
+            int DeliveryHour, DeliveryMinute;
+            LoadDeliveries();
+            try
+            {
+                DeliveryHour = int.Parse(delivery.Substring(0, 2));
+                DeliveryMinute = int.Parse(delivery.Substring(2, 2));
+            }
+            catch 
+            {
+                ViewBag.ErrorMessage = "Si è verificato un errore durante la conferma. Prego riprovare";
+                return View("Index",cart);
+            }
+            var now = DateTime.Now;
+            var deliverydate = new DateTime(now.Year, now.Month, now.Day, DeliveryHour, DeliveryMinute, 0);
+            if (string.IsNullOrEmpty(Email)
+                || string.IsNullOrEmpty(Phone)
+                || deliverydate <= now
+                    )
+            {
+                ViewBag.ErrorMessage = "Campi non compilati o ora consegna non valida!";
+                return View("Index", cart);
+            }
 
             if (cart != null)
             {
                 cart.Notes = Notes;
                 cart.Email = Email;
                 cart.Phone = Phone;
-                var now = DateTime.Now;
-                cart.DeliveryDate = new DateTime(now.Year,now.Month,now.Day,DeliveryHour,DeliveryMinute,0);
+                cart.DeliveryDate = deliverydate;
                 cart.Closed = true;
                 cart.ClosedDate = DateTime.Now;
                 cart.ConfirmedTotal = cart.Items.Select(c => c.ItemPrice*c.Quantity).Sum();

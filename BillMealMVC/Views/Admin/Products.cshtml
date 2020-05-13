@@ -2,6 +2,7 @@
 @{
     ViewBag.Title = "Admin";
 }
+@using BillMealMVC.Extensions
 <hr />
 <div class="row">
     <div class="col-md-2">
@@ -37,29 +38,47 @@
     </div>
     <div class="col-md-10">
         <div class="p-3 bg-secondary text-white ">
-            @foreach (var item in Model)
-            {
-                <div class="p-1 thumb-frame mr-1 float-left">
-                    <a href="/admin/edit?id=@item.ItemId">
-                        <div class="">
-                            <div class="thumb">
-                                @{
-                                    var img = "/imgs/"+(item.ItemId) + ".jpg";
-                                    if (!File.Exists(System.Configuration.ConfigurationManager.AppSettings["imagepath"]+ "\\"+img))
-                                    {
-                                        img = "/imgs/noimage.jpg";
-                                    }
-                                }
-                                <img class="img-thumb" src="@img" />
+            <div class="container">
+                @foreach (var item in Model)
+                {
+                    var img = "/imgs/" + (item.ItemId) + ".jpg";
+                    if (!File.Exists(System.Configuration.ConfigurationManager.AppSettings["imagepath"] + "\\" + img))
+                    {
+                        img = "/imgs/noimage.jpg";
+                    }
+                    <div class="card float-left mx-2 mt-2" style="width: 18rem; overflow: hidden;">
+                        <a class="a-style" href="/admin/edit?id=@item.ItemId">
+                            <div class="card-img-top thumb " style="background-image:url('@img')">
+                                @Html.Price((BillMealMVC.Models.Item) item);
                             </div>
+                            <div class="card-body" style="height:10rem">
+                                <h5 class="card-title">@item.Name</h5>
+                                <p class="card-text">@item.Description<p>
+                            </div>
+                        </a>
+                    </div>
+                    @*<div class="p-1 thumb-frame mr-1 float-left">
+                <a href="/admin/edit?id=@item.ItemId">
+                    <div class="">
+                        <div class="thumb">
+                            @{
+                                var img = "/imgs/" + (item.ItemId) + ".jpg";
+                                if (!File.Exists(System.Configuration.ConfigurationManager.AppSettings["imagepath"] + "\\" + img))
+                                {
+                                    img = "/imgs/noimage.jpg";
+                                }
+                            }
+                            <img class="img-thumb" src="@img" />
                         </div>
-                        <div class="thumb-foot">
-                            <h4>@item.Name</h4>
-                            <div class="p-1">@item.Description</div>
-                        </div>
-                    </a>
-                </div>
-            }
+                    </div>
+                    <div class="thumb-foot">
+                        <h4>@item.Name</h4>
+                        <div class="p-1">@item.Description</div>
+                    </div>
+                </a>
+            </div>*@
+                }
+            </div>
+            </div>
         </div>
-    </div>
 </div>

@@ -132,15 +132,16 @@ namespace BillMealMVC.Controllers
                 mailMessage.Subject = "Il tuo ordine è stato confermato";
                 mailMessage.Body = template;
                 mailMessage.IsBodyHtml = true;
-                SmtpClient smtpClient = new SmtpClient("smtp.your-isp.com");
+                SmtpClient smtpClient = new SmtpClient("smtps.aruba.it");
 
 
                 smtpClient.DeliveryMethod = SmtpDeliveryMethod.Network;
                 smtpClient.UseDefaultCredentials = false;
                 smtpClient.EnableSsl = true;
-                smtpClient.Host = "smtp.gmail.com";
-                smtpClient.Port = 587;
-                //smtpClient.Send(mailMessage);
+                smtpClient.Host = "smtps.aruba.it";
+                smtpClient.Port = 465;
+                smtpClient.Credentials = new NetworkCredential(_settings.UserEmail, _settings.PasswordEmail);
+                smtpClient.Send(mailMessage);
             }
             catch (Exception ex)
             {

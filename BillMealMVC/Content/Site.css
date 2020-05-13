@@ -1,12 +1,13 @@
 ﻿body {
     padding-bottom: 20px;
+    background-color: #c2c2a3;
 }
 
 /* Set padding to keep content from hitting the edges */
 .body-content {
     padding-left: 15px;
     padding-right: 15px;
-    background-image: url('/imgs/background.jpg');
+    /*background-image: url('/imgs/background.jpg');*/
     background-attachment: fixed;
     min-height: 100vh;
 }
@@ -19,8 +20,7 @@
 }
 
 /* Set width on the form input elements since they're 100% wide by default */
-
-.thumb-frame a {
+.a-style {
     color: gray;
     font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     transition: all .3s ease-in-out;

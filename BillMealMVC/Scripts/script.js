@@ -28,3 +28,15 @@ function mouseEnter() {
 function mouseLeave() {
     $('.dropdown-menu').dropdown('hide');
 };
+
+
+function discountChange(which) {
+    var discountamount = $('#DiscountAmount');
+    var discountpercent = $('#DiscountPercent');
+    if (discountamount == which) {
+        discountpercent.val("");
+    }
+    if (discountpercent == which) {
+        discountamount.val("");
+    }
+}
