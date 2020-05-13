@@ -22,7 +22,7 @@
         @foreach (BillMealMVC.Models.CartHead row in Model)
         {
         <tr class="clickable-row" data-href="/admin/vieworder?id=@row.CartId">
-            <th scope="row">@number</th>
+            <th scope="row">@row.CartId</th>
             <td>@row.CreationDate</td>
             <td>@row.Email</td>
             <td>@row.Phone</td>

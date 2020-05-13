@@ -4,7 +4,7 @@
 }
 @model BillMealMVC.Models.CartHead
 
-<h2>ViewOrder</h2>
+<h2>Ordine #@Model.CartId</h2>
 
 <div class="container">
     <div class="d-flex flex-row-reverse bd-highlight">
@@ -106,14 +106,17 @@
     function sendEmail() {
         $('#buttonsend').addClass("disabled");
         $('#mdlconfermainvio').modal('hide');
+        showloader(true);
         $.ajax({
             type: "get",
 
             url: "/admin/sendemail?id="+@Model.CartId,
             success: function (data, stato) {
+                showloader(false);
                 toastr.success("E-mail inviata con successo");
             },
             error: function (richiesta, stato, errori) {
+                showloader(false);
                 toastr.error("Si è verificato un errore");
             }
         });
@@ -175,3 +178,4 @@
         </div>
     </div>
 </div>
+<div id="loading"></div>

@@ -33,10 +33,14 @@ function mouseLeave() {
 function discountChange(which) {
     var discountamount = $('#DiscountAmount');
     var discountpercent = $('#DiscountPercent');
-    if (discountamount == which) {
-        discountpercent.val("");
+    if (discountamount.attr('name') == which.attr('name')) {
+        discountpercent.val("0");
     }
-    if (discountpercent == which) {
-        discountamount.val("");
+    if (discountpercent.attr('name') == which.attr('name')) {
+        discountamount.val("0");
     }
+}
+
+function showloader(value) {
+    document.getElementById("loading").style.display = value ? 'block' : 'none';
 }

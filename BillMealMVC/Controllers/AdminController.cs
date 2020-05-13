@@ -138,7 +138,7 @@ namespace BillMealMVC.Controllers
                 smtpClient.DeliveryMethod = SmtpDeliveryMethod.Network;
                 smtpClient.UseDefaultCredentials = false;
                 smtpClient.EnableSsl = true;
-                smtpClient.Host = "smtps.aruba.it";
+                smtpClient.Host = "smtp.aruba.it";
                 smtpClient.Port = 465;
                 smtpClient.Credentials = new NetworkCredential(_settings.UserEmail, _settings.PasswordEmail);
                 smtpClient.Send(mailMessage);
