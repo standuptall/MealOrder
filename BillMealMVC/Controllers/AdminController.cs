@@ -48,11 +48,6 @@ namespace BillMealMVC.Controllers
         }
 
         [Authorize]
-        public ActionResult Categories()
-        {
-            return View();
-        }
-        [Authorize]
         public ActionResult Edit(int? id)
         {
             Item Item = null;
@@ -164,7 +159,75 @@ namespace BillMealMVC.Controllers
             context.SaveChanges();
             return Json(new { message = "ok" }, JsonRequestBehavior.AllowGet);
 
-
+        }
+        [Authorize]
+        public ActionResult Categories()
+        {
+            var cats = context.ItemCategories.Select(c => new ItemCategoryModel
+            {
+                CategoryId = c.CategoryId,
+                Description = c.Description
+            }).ToList();
+            foreach(var cat in cats)
+            {
+                cat.NumberOfProducts = context.Items.Where(c => c.CategoryId == cat.CategoryId).Count();
+            }
+            return View("Categories",cats);
+        }
+        [Authorize]
+        public ActionResult ViewCategory(int? id)
+        {
+            if (Request.HttpMethod.ToLower() == "post")
+            {
+                return SaveCategory();
+            }
+            ItemCategoryModel cat = null;
+            if (id != null)
+            {
+                cat = context.ItemCategories.Where(c => c.CategoryId == id).Select(c => new ItemCategoryModel
+                {
+                    CategoryId = c.CategoryId,
+                    Description = c.Description
+                }).FirstOrDefault();
+                cat.NumberOfProducts = context.Items.Where(c => c.CategoryId == id).Count();
+            }
+            if (cat == null)
+                cat = new ItemCategoryModel();
+            return View(cat);
+        }
+        [Authorize]
+        public ActionResult SaveCategory()
+        {
+            var Description = HttpContext.Request.Form["Description"];
+            var idstring = HttpContext.Request.Form["CategoryId"];
+            int id = 0;
+            if (!string.IsNullOrEmpty(idstring))
+                id = int.Parse(idstring);
+            ItemCategory cat = null;
+            if (id > 0){
+                cat = context.ItemCategories.Where(c => c.CategoryId == id).FirstOrDefault();
+                if (cat == null)
+                    return Categories();
+                cat.Description = Description;
+            }else
+            {
+                cat = new ItemCategory();
+                cat.Description = Description;
+                context.ItemCategories.Add(cat);
+            }
+            context.SaveChanges();
+            return Categories();
+        }
+        [Authorize]
+        public ActionResult DeleteCategory(int id)
+        {
+            var cat = context.ItemCategories.Where(c => c.CategoryId == id).FirstOrDefault();
+            if (cat == null)
+                return Categories();
+            context.ItemCategories.Remove(cat);
+            context.Entry<ItemCategory>(cat).State = EntityState.Deleted;
+            context.SaveChanges();
+            return Categories();
         }
     }
 }

@@ -229,6 +229,10 @@
     <Compile Include="Migrations\202005151708330_boh.Designer.cs">
       <DependentUpon>202005151708330_boh.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202005151949146_footer1.cs" />
+    <Compile Include="Migrations\202005151949146_footer1.Designer.cs">
+      <DependentUpon>202005151949146_footer1.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\CartHead.cs" />
@@ -236,6 +240,7 @@
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\Item.cs" />
     <Compile Include="Models\ItemCategory.cs" />
+    <Compile Include="Models\ItemCategoryModel.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\MealContext.cs" />
     <Compile Include="Models\Settings.cs" />
@@ -338,6 +343,7 @@
     <Content Include="Views\Admin\Categories.cshtml" />
     <Content Include="Views\Admin\OrderList.cshtml" />
     <Content Include="Views\Admin\ViewOrder.cshtml" />
+    <Content Include="Views\Admin\ViewCategory.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -385,6 +391,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202005151708330_boh.resx">
       <DependentUpon>202005151708330_boh.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202005151949146_footer1.resx">
+      <DependentUpon>202005151949146_footer1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

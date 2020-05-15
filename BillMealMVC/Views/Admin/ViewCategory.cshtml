@@ -3,7 +3,7 @@
 @{
     ViewBag.Title = "Categorie";
 }
-@model BillMealMVC.Models.CategoryModel
+@model BillMealMVC.Models.ItemCategoryModel
 <hr />
 <div class="row">
     <div class="col-md-2">
@@ -18,11 +18,11 @@
                 <div class="col-md-10">
                     <div class="form-group d-none">
                         <label for="ItemId">Name</label>
-                        <input class="form-control" type="number" name="CategoryId" readonly value="@(Model?.CategoryId)" />
+                        <input class="form-control" type="number" name="CategoryId" readonly value="@(Model.CategoryId)" />
                     </div>
                     <div class="form-group">
                         <label for="ItemId">Name</label>
-                        <input class="form-control" type="text" name="Description" required value="@(Model?.Description)" />
+                        <input class="form-control" type="text" name="Description" required value="@(Model.Description)" />
                     </div>
                     <div class="form-group">
                         <button class="btn btn-success glyphicon-align-right" type="submit">Salva</button>
@@ -46,7 +46,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Annulla</button>
-                <a class="btn btn-primary" href="/admin/deletecategory?id=@(Model?.CategoryId)" >Save changes</a>
+                <a class="btn btn-primary" href="/admin/deletecategory?id=@(Model.CategoryId)" >Save changes</a>
             </div>
         </div>
     </div>
@@ -72,7 +72,7 @@
 </div>
 <script type="text/javascript">
     function confirmDelete() {
-        var yes = @(((Model?.NumeroProdotti)??0) > 0 ? "false" : "true");
+        var yes = @(Model.NumberOfProducts > 0 ? "false" : "true");
         if (!yes) {
             $('#cannotdeletemodal').modal('show');
         }

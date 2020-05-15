@@ -19,15 +19,12 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="/Products?cat=1">Panini</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/Products?cat=3">Caffetteria</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/Products?cat=2">Bibite</a>
-                </li>
+                @foreach (var cat in ViewBag.Categories)
+                {
+                    <li class="nav-item">
+                        <a class="nav-link" href="/Products?cat=@cat.CategoryId">@cat.Description</a>
+                    </li>
+                }
                 @if (HttpContext.Current.User.Identity.IsAuthenticated)
                 {
 
@@ -54,7 +51,7 @@
     </div>
 
     <footer class="footer bg-dark text-light">
-        <p>&copy; @DateTime.Now.Year - @ViewBag.AppName</p>
+        <p>&copy; @DateTime.Now.Year - @ViewBag.AppName - @ViewBag.FooterDescription</p>
     </footer>
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")

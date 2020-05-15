@@ -140,3 +140,5 @@ C:\Alberto\testwebform\BillMealMVC\BillMealMVC\obj\Debug\BillMealMVC.csproj.Core
 C:\Alberto\testwebform\BillMealMVC\BillMealMVC\obj\Debug\BillMealMVC.csproj.CopyComplete
 C:\Alberto\testwebform\BillMealMVC\BillMealMVC\obj\Debug\BillMealMVC.dll
 C:\Alberto\testwebform\BillMealMVC\BillMealMVC\obj\Debug\BillMealMVC.pdb
+C:\Alberto\testwebform\BillMealMVC\BillMealMVC\obj\Debug\BillMealMVC.csprojAssemblyReference.cache
+C:\Alberto\testwebform\BillMealMVC\BillMealMVC\obj\Debug\BillMealMVC.Migrations.footer1.resources
