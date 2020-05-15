@@ -1,0 +1,36 @@
+﻿
+@{
+    ViewBag.Title = "OrderList";
+}
+
+<table class="table table-dark table-striped">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Data</th>
+            <th scope="col">E-mail</th>
+            <th scope="col">Telefono</th>
+            <th scope="col">Consegna</th>
+            <th scope="col">Totale</th>
+            <th scope="col">Note</th>
+        </tr>
+    </thead>
+    <tbody>
+        @{ 
+            int number = 1;
+        }
+        @foreach (BillMealMVC.Models.CartHead row in Model)
+        {
+        <tr class="clickable-row" data-href="/admin/vieworder?id=@row.CartId">
+            <th scope="row">@row.CartId</th>
+            <td>@row.CreationDate</td>
+            <td>@row.Email</td>
+            <td>@row.Phone</td>
+            <td>@(row.DeliveryDate.HasValue ? row.DeliveryDate.Value.ToString("ddd dd MMMM HH:mm"):"")</td>
+            <td>@Utils.FormatPrice(row.ConfirmedTotal)</td>
+            <td>@row.Notes</td>
+        </tr>
+            number++;
+        }
+    </tbody>
+</table>

@@ -1,0 +1,32 @@
+﻿@using Microsoft.AspNet.Identity
+@using BillMealMVC.Extensions
+@if (Request.IsAuthenticated)
+{
+    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+    {
+        @Html.AntiForgeryToken()
+
+        <ul class="nav navbar-nav navbar-right">
+            <li>
+                @Html.ActionLink("Salve " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
+            </li>
+            <li><a href="javascript:document.getElementById('logoutForm').submit()">Disconnetti</a></li>
+        </ul>
+    }
+}
+<ul class="nav navbar-nav navbar-right">
+    <li class="nav-item active">
+        <a id="cart_button" class="btn btn-primarydropdown-toggle text-light" href="/checkout" data-toggle="dropdown" data-display="static" aria-haspopup="true" aria-expanded="false">
+            Carrello @Html.CartNumberOfItems(Request)
+            <span class="sr-only">unread messages</span>
+        </a>
+        @Html.CartPreview(Request)
+    </li>
+</ul>
+@*else
+    {
+        <ul class="nav navbar-nav navbar-right">
+            <li>@Html.ActionLink("Registrazione", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
+            <li>@Html.ActionLink("Accedi", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+        </ul>
+    }*@

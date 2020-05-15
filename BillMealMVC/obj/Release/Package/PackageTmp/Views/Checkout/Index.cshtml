@@ -1,0 +1,88 @@
+﻿
+@{
+    ViewBag.Title = "Checkout";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<form class="form" method="post" enctype="multipart/form-data" id="cart_form">
+    <div class="row container mx-auto">
+        <div class="col-md-6">
+            <table class="table">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>Prodotto</th>
+                        <th>Quantità</th>
+                        <th>Prezzo</th>
+                    </tr>
+                </thead>
+                @{
+                    var totale = 0.0;
+                }
+                <tbody>
+                    @foreach (BillMealMVC.Models.CartRows row in Model.Items)
+                    {
+                        <tr>
+                            <td><img class="cart-thumbnail" src="~/imgs/@(row.ItemId).jpg" />@row.ItemName</td>
+                            <td><input class="form-control" style="width:100px;" value="@row.Quantity" type="number" name="Quantity" onchange="cart_reload(@(row.CartRowId),this)" /></td>
+                            <td>@Utils.FormatPrice(row.ItemPrice)</td>
+                        </tr>
+                        totale += (row.ItemPrice * row.Quantity);
+                    }
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <th>Totale: @Utils.FormatPrice(totale)</th>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+        <div class="col-md-6">
+            @if (!string.IsNullOrEmpty(ViewBag.ErrorMessage))
+            {
+                <div class="row">
+                    <div class="alert alert-danger" role="alert">
+                        @ViewBag.ErrorMessage
+                    </div>
+                </div>
+            }
+                <div class="mx-auto col-md-10">
+                    <div class="form-group " style="width:13em;">
+                        <label for="deliverytime" class="success">Ora di consegna</label>
+                        <select name="deliverytime" id="deliverytime" class="form-control" required>
+                            <option disabled selected value=""> -- Scegli un orario -- </option>
+                            @foreach (string[] del in ViewBag.Deliveries)
+                            {
+                                <option value="@del[0]">@del[1]</option>
+                            }
+
+                        </select>
+                    </div>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="inputGroupPrepend3">@("@")</span>
+                        </div>
+                        <input name="email" type="email" class="form-control" id="email" placeholder="E-mail" aria-describedby="inputGroupPrepend3" required>
+                        
+                    </div>
+                    <div class="form-group ">
+                        <label for="phone" class="success">Numero di telefono</label>
+                        <input type="number" name="Phone" id="Phone" class="form-control" style="width:100%;" placeholder="Telefono" required />
+                        <div class="invalid-feedback">
+                            You must agree before submitting.
+                        </div>
+                    </div>
+                    <div class="form-group ">
+                        <label for="Notes" class="success">Inserisci note aggiuntive all'ordine (es. ingredienti +/-)</label>
+                        <textarea rows="3" name="Notes" id="Notes" class="form-control" placeholder="Note" style="width:100%;"></textarea>
+                        <div class="invalid-feedback">
+                            You must agree before submitting.
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-success float-right mx-1">Invia ordine</button>
+                </div>
+            </div>
+    </div>
+</form>

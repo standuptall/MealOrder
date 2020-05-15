@@ -11,6 +11,7 @@ namespace BillMealMVC.Model
     {
         public MealContext() : base("MealContext")
         {
+            Database.SetInitializer<MealContext>(null);
         }
         public DbSet<CartHead> Cart { get; set; }
         public DbSet<Item> Items { get; set; }

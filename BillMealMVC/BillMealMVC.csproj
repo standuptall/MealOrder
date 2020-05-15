@@ -221,6 +221,14 @@
     <Compile Include="Migrations\202005132057447_setin.Designer.cs">
       <DependentUpon>202005132057447_setin.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202005142027424_footer.cs" />
+    <Compile Include="Migrations\202005142027424_footer.Designer.cs">
+      <DependentUpon>202005142027424_footer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202005151708330_boh.cs" />
+    <Compile Include="Migrations\202005151708330_boh.Designer.cs">
+      <DependentUpon>202005151708330_boh.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\CartHead.cs" />
@@ -243,14 +251,31 @@
     <Content Include="Content\fontawesome\font-awesome.css" />
     <Content Include="Content\fontawesome\font-awesome.min.css" />
     <Content Include="Content\fonts\fontawesome-webfont.svg" />
+    <Content Include="Content\movie.mp4" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="imgs\1.jpg" />
+    <Content Include="imgs\2.jpg" />
+    <Content Include="imgs\3.jpg" />
+    <Content Include="imgs\4.jpg" />
+    <Content Include="imgs\5.jpg" />
+    <Content Include="imgs\6.jpg" />
+    <Content Include="imgs\7.jpg" />
     <Content Include="imgs\add-to-cart-m.png" />
     <Content Include="imgs\add-to-cart-s.png" />
     <Content Include="imgs\add-to-cart.png" />
+    <Content Include="imgs\background.jpg" />
+    <Content Include="imgs\card1.png" />
+    <Content Include="imgs\card2.png" />
+    <Content Include="imgs\card3.png" />
+    <Content Include="imgs\logo.jpg" />
+    <Content Include="imgs\logo.png" />
+    <Content Include="imgs\movie.mp4" />
+    <Content Include="imgs\noimage.jpg" />
     <Content Include="imgs\plus.png" />
+    <Content Include="imgs\success.png" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="appsettings.json" />
@@ -354,6 +379,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202005132057447_setin.resx">
       <DependentUpon>202005132057447_setin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202005142027424_footer.resx">
+      <DependentUpon>202005142027424_footer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202005151708330_boh.resx">
+      <DependentUpon>202005151708330_boh.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

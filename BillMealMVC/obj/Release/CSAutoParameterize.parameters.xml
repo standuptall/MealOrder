@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<parameters>
+  <parameter name="MealContext-Web.config Connection String" description="MealContext Stringa di connessione utilizzata in web.config per l'accesso al database da parte dell'applicazione." defaultValue="Server=62.149.153.38;Database=MSSql193145;User Id=MSSql193145;Password=63083d2ah4;" tags="SqlConnectionString">
+    <parameterEntry kind="XmlFile" scope="C:\\Alberto\\testwebform\\BillMealMVC\\BillMealMVC\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='MealContext']/@connectionString" />
+  </parameter>
+</parameters>

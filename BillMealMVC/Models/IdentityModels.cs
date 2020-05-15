@@ -23,6 +23,7 @@ namespace BillMealMVC.Models
         public ApplicationDbContext()
             : base("MealContext", throwIfV1Schema: false)
         {
+            Database.SetInitializer<ApplicationDbContext>(null);
         }
 
         public static ApplicationDbContext Create()

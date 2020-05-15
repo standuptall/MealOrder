@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<parameters>
+  <parameter name="IIS Web Application Name" description="" value="italianburgerpavia.it" tags="IisApp">
+    <parameterEntry kind="ProviderPath" scope="IisApp" match="^C:\\Alberto\\testwebform\\BillMealMVC\\BillMealMVC\\obj\\Release\\Package\\PackageTmp$" />
+    <parameterEntry kind="ProviderPath" scope="setAcl" match="^C:\\Alberto\\testwebform\\BillMealMVC\\BillMealMVC\\obj\\Release\\Package\\PackageTmp$" />
+  </parameter>
+  <parameter name="MealContext-Web.config Connection String" description="" value="Server=localhost;Database=BillMeal;User Id=sa;Password=Password99;" tags="">
+    <parameterEntry kind="XmlFile" scope="C:\\Alberto\\testwebform\\BillMealMVC\\BillMealMVC\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='MealContext']/@connectionString" />
+  </parameter>
+</parameters>

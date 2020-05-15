@@ -1,3 +1,9 @@
+C:\Alberto\testwebform\BillMealMVC\BillMealMVC\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+C:\Alberto\testwebform\BillMealMVC\BillMealMVC\bin\roslyn\Microsoft.CodeAnalysis.dll
+C:\Alberto\testwebform\BillMealMVC\BillMealMVC\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+C:\Alberto\testwebform\BillMealMVC\BillMealMVC\bin\roslyn\Microsoft.DiaSymReader.Native.amd64.dll
+C:\Alberto\testwebform\BillMealMVC\BillMealMVC\bin\roslyn\System.IO.Compression.dll
+C:\Alberto\testwebform\BillMealMVC\BillMealMVC\bin\roslyn\VBCSCompiler.exe
 C:\Alberto\testwebform\BillMealMVC\BillMealMVC\bin\BillMealMVC.dll.config
 C:\Alberto\testwebform\BillMealMVC\BillMealMVC\bin\BillMealMVC.dll
 C:\Alberto\testwebform\BillMealMVC\BillMealMVC\bin\BillMealMVC.pdb
@@ -8,13 +14,9 @@ C:\Alberto\testwebform\BillMealMVC\BillMealMVC\bin\roslyn\csi.exe
 C:\Alberto\testwebform\BillMealMVC\BillMealMVC\bin\roslyn\csi.exe.config
 C:\Alberto\testwebform\BillMealMVC\BillMealMVC\bin\roslyn\csi.rsp
 C:\Alberto\testwebform\BillMealMVC\BillMealMVC\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
-C:\Alberto\testwebform\BillMealMVC\BillMealMVC\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
 C:\Alberto\testwebform\BillMealMVC\BillMealMVC\bin\roslyn\Microsoft.CodeAnalysis.CSharp.Scripting.dll
-C:\Alberto\testwebform\BillMealMVC\BillMealMVC\bin\roslyn\Microsoft.CodeAnalysis.dll
 C:\Alberto\testwebform\BillMealMVC\BillMealMVC\bin\roslyn\Microsoft.CodeAnalysis.Scripting.dll
-C:\Alberto\testwebform\BillMealMVC\BillMealMVC\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
 C:\Alberto\testwebform\BillMealMVC\BillMealMVC\bin\roslyn\Microsoft.CSharp.Core.targets
-C:\Alberto\testwebform\BillMealMVC\BillMealMVC\bin\roslyn\Microsoft.DiaSymReader.Native.amd64.dll
 C:\Alberto\testwebform\BillMealMVC\BillMealMVC\bin\roslyn\Microsoft.DiaSymReader.Native.x86.dll
 C:\Alberto\testwebform\BillMealMVC\BillMealMVC\bin\roslyn\Microsoft.Managed.Core.targets
 C:\Alberto\testwebform\BillMealMVC\BillMealMVC\bin\roslyn\Microsoft.VisualBasic.Core.targets
@@ -26,7 +28,6 @@ C:\Alberto\testwebform\BillMealMVC\BillMealMVC\bin\roslyn\System.Diagnostics.Dia
 C:\Alberto\testwebform\BillMealMVC\BillMealMVC\bin\roslyn\System.Diagnostics.FileVersionInfo.dll
 C:\Alberto\testwebform\BillMealMVC\BillMealMVC\bin\roslyn\System.Diagnostics.StackTrace.dll
 C:\Alberto\testwebform\BillMealMVC\BillMealMVC\bin\roslyn\System.Globalization.Calendars.dll
-C:\Alberto\testwebform\BillMealMVC\BillMealMVC\bin\roslyn\System.IO.Compression.dll
 C:\Alberto\testwebform\BillMealMVC\BillMealMVC\bin\roslyn\System.IO.Compression.ZipFile.dll
 C:\Alberto\testwebform\BillMealMVC\BillMealMVC\bin\roslyn\System.IO.FileSystem.dll
 C:\Alberto\testwebform\BillMealMVC\BillMealMVC\bin\roslyn\System.IO.FileSystem.Primitives.dll
@@ -48,7 +49,6 @@ C:\Alberto\testwebform\BillMealMVC\BillMealMVC\bin\roslyn\System.Xml.XPath.XDocu
 C:\Alberto\testwebform\BillMealMVC\BillMealMVC\bin\roslyn\vbc.exe
 C:\Alberto\testwebform\BillMealMVC\BillMealMVC\bin\roslyn\vbc.exe.config
 C:\Alberto\testwebform\BillMealMVC\BillMealMVC\bin\roslyn\vbc.rsp
-C:\Alberto\testwebform\BillMealMVC\BillMealMVC\bin\roslyn\VBCSCompiler.exe
 C:\Alberto\testwebform\BillMealMVC\BillMealMVC\bin\roslyn\VBCSCompiler.exe.config
 C:\Alberto\testwebform\BillMealMVC\BillMealMVC\bin\Antlr3.Runtime.dll
 C:\Alberto\testwebform\BillMealMVC\BillMealMVC\bin\EntityFramework.dll
@@ -132,10 +132,11 @@ C:\Alberto\testwebform\BillMealMVC\BillMealMVC\obj\Debug\BillMealMVC.Migrations.
 C:\Alberto\testwebform\BillMealMVC\BillMealMVC\obj\Debug\BillMealMVC.Migrations.deliverydate.resources
 C:\Alberto\testwebform\BillMealMVC\BillMealMVC\obj\Debug\BillMealMVC.Migrations.deliverydate1.resources
 C:\Alberto\testwebform\BillMealMVC\BillMealMVC\obj\Debug\BillMealMVC.Migrations.canceledeamilsent.resources
+C:\Alberto\testwebform\BillMealMVC\BillMealMVC\obj\Debug\BillMealMVC.Migrations.setin.resources
+C:\Alberto\testwebform\BillMealMVC\BillMealMVC\obj\Debug\BillMealMVC.Migrations.footer.resources
+C:\Alberto\testwebform\BillMealMVC\BillMealMVC\obj\Debug\BillMealMVC.Migrations.boh.resources
 C:\Alberto\testwebform\BillMealMVC\BillMealMVC\obj\Debug\BillMealMVC.csproj.GenerateResource.cache
 C:\Alberto\testwebform\BillMealMVC\BillMealMVC\obj\Debug\BillMealMVC.csproj.CoreCompileInputs.cache
 C:\Alberto\testwebform\BillMealMVC\BillMealMVC\obj\Debug\BillMealMVC.csproj.CopyComplete
 C:\Alberto\testwebform\BillMealMVC\BillMealMVC\obj\Debug\BillMealMVC.dll
 C:\Alberto\testwebform\BillMealMVC\BillMealMVC\obj\Debug\BillMealMVC.pdb
-C:\Alberto\testwebform\BillMealMVC\BillMealMVC\obj\Debug\BillMealMVC.csprojAssemblyReference.cache
-C:\Alberto\testwebform\BillMealMVC\BillMealMVC\obj\Debug\BillMealMVC.Migrations.setin.resources

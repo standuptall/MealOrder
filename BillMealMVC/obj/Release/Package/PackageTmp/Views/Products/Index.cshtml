@@ -1,0 +1,58 @@
+﻿
+@{
+    ViewBag.Title = "Prodotti";
+}
+@using BillMealMVC.Extensions
+<h1><br /></h1>
+<div class="row">
+    <div class="col-md-2">
+
+    </div>
+    <div class="col-md-10 products mx-auto">
+        <div class="container">
+            @foreach (BillMealMVC.Models.Item item in Model)
+            {
+                var img = "/imgs/" + (item.ItemId) + ".jpg";
+                if (!File.Exists(System.Configuration.ConfigurationManager.AppSettings["imagepath"] + "\\" + img))
+                {
+                    img = "/imgs/noimage.jpg";
+                }
+                <div class="card float-left mx-2 mt-2" style="width: 18rem; overflow: hidden;">
+                    <div class="card-img-top thumb " style="background-image:url('@img')">
+                        @Html.Price(item);
+                    </div>
+                    <div class="card-body" style="height:10rem">
+                        <h5 class="card-title">@item.Name</h5>
+                        <p class="card-text">@item.Description<p>
+                            <a href="/products/addtocart?id=@(item.ItemId)" class="btn btn-success">Aggiungi al carrello</a>
+                    </div>
+                </div>
+                @*<div class="p-1 thumb-frame mr-1 float-left">
+
+                <div class="thumb-header">
+                    @{
+                        var img = "/imgs/" + (item.ItemId) + ".jpg";
+                        if (!File.Exists(System.Configuration.ConfigurationManager.AppSettings["imagepath"] + "\\" + img))
+                        {
+                            img = "/imgs/noimage.jpg";
+                        }
+                    }
+                    <div class="thumb " style="background-image:url('@img')">
+                        @Html.Price(item);
+                    </div>
+                </div>
+                <div class="thumb-foot">
+                    <a href="/admin/edit?id=@item.ItemId"><h4>@item.Name</h4></a>
+                    <div class="p-1 row">
+                        <div class="col-md-9"><span class="description">@item.Description</span> </div>
+
+                        <div class="col-md-3"><a class="btn btn-success add-to-cart" href="/products/addtocart?id=@(item.ItemId)"><img class="add-to-cart-image" src="~/imgs/add-to-cart-s.png" /></a></div>
+
+                    </div>
+                </div>
+
+            </div>*@
+            }
+        </div>
+    </div>
+</div>
