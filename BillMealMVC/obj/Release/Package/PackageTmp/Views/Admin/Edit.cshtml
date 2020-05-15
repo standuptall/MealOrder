@@ -10,7 +10,7 @@
                     <div class="img-edit" onclick="$('#file-input').click();">
                         @{
                             var img = "/imgs/" + (Model.ItemId) + ".jpg";
-                            if (!File.Exists(System.Configuration.ConfigurationManager.AppSettings["imagepath"] + "\\" + img))
+                            if (!File.Exists(ViewBag._settings.ApplicationPath + "\\" + img))
                             {
                                 img = "/imgs/noimage.jpg";
                             }
