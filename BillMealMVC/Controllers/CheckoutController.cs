@@ -23,7 +23,8 @@ namespace BillMealMVC.Controllers
                 return Confirm();
             }
             var cart = Utils.GetCart(context,Request);
-            if (cart.Items.Count == 0)
+            
+            if (cart == null || cart.Items.Count == 0)
                 return Redirect("/Products");
             LoadDeliveries();
             return View(cart);
@@ -96,10 +97,11 @@ namespace BillMealMVC.Controllers
                 return View("Index",cart);
             }
             var now = DateTime.Now;
-            var deliverydate = new DateTime(now.Year, now.Month, now.Day, DeliveryHour, DeliveryMinute, 0);
+            var tomorrow = DateTime.Now.AddDays(1);
+            var usedate = DeliveryHour < now.Hour ? tomorrow : now;
+            var deliverydate = new DateTime(usedate.Year, usedate.Month, usedate.Day, DeliveryHour, DeliveryMinute, 0);
             if (string.IsNullOrEmpty(Email)
                 || string.IsNullOrEmpty(Phone)
-                || deliverydate <= now
                     )
             {
                 ViewBag.ErrorMessage = "Campi non compilati o ora consegna non valida!";

@@ -13,7 +13,8 @@
             @foreach (BillMealMVC.Models.Item item in Model)
             {
                 var img = "/imgs/" + (item.ItemId) + ".jpg";
-                if (!File.Exists(ViewBag._settings.ApplicationPath + "\\" + img))
+                var imgfile = "imgs\\" + (item.ItemId) + ".jpg";
+                if (!File.Exists(Server.MapPath("~")+ imgfile))
                 {
                     img = "/imgs/noimage.jpg";
                 }

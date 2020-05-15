@@ -265,13 +265,6 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <Content Include="imgs\1.jpg" />
-    <Content Include="imgs\2.jpg" />
-    <Content Include="imgs\3.jpg" />
-    <Content Include="imgs\4.jpg" />
-    <Content Include="imgs\5.jpg" />
-    <Content Include="imgs\6.jpg" />
-    <Content Include="imgs\7.jpg" />
     <Content Include="imgs\add-to-cart-m.png" />
     <Content Include="imgs\add-to-cart-s.png" />
     <Content Include="imgs\add-to-cart.png" />

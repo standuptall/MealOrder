@@ -58,14 +58,15 @@
     @Scripts.Render("~/bundles/script")
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
     @Scripts.Render("~/bundles/script")
+    @RenderSection("scripts", required: false)
 
 
     <script type="text/javascript">
         /* Edit product -->
         */
-                            //function img_onclick() {
-                            //$('#file-input').click();
-                            //}
+                                //function img_onclick() {
+                                //$('#file-input').click();
+                                //}
         /* Edit product <-- */
     </script>
 </body>

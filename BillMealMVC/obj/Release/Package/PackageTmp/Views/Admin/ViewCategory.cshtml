@@ -7,7 +7,7 @@
 <hr />
 <div class="row">
     <div class="col-md-2">
-        @if (Model != null)
+        @if (Model != null && Model.CategoryId> 0)
         {
         <button class="btn btn-danger btn-block mb-1" onclick="confirmDelete()">Elimina categoria</button>
         }
