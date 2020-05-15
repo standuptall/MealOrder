@@ -1,0 +1,84 @@
+﻿
+
+@{
+    ViewBag.Title = "Categorie";
+}
+@model BillMealMVC.Models.ItemCategoryModel
+<hr />
+<div class="row">
+    <div class="col-md-2">
+        @if (Model != null)
+        {
+        <button class="btn btn-danger btn-block mb-1" onclick="confirmDelete()">Elimina categoria</button>
+        }
+    </div>
+    <div class="col-md-10">
+        <form class="form" method="post">
+            <div class="row">
+                <div class="col-md-10">
+                    <div class="form-group d-none">
+                        <label for="ItemId">Name</label>
+                        <input class="form-control" type="number" name="CategoryId" readonly value="@(Model.CategoryId)" />
+                    </div>
+                    <div class="form-group">
+                        <label for="ItemId">Name</label>
+                        <input class="form-control" type="text" name="Description" required value="@(Model.Description)" />
+                    </div>
+                    <div class="form-group">
+                        <button class="btn btn-success glyphicon-align-right" type="submit">Salva</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<div class="modal fade" id="confirmdeletemodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Conferma eliminazione</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Sei sicuro di voler eliminare la categoria?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Annulla</button>
+                <a class="btn btn-primary" href="/admin/deletecategory?id=@(Model.CategoryId)" >Save changes</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="cannotdeletemodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Impossibile eliminare</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Impossibile eliminare la categoria perché contiene dei prodotti. Togliere i prodotti dal suo interno e poi riprovare.
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Chiudi</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    function confirmDelete() {
+        var yes = @(Model.NumberOfProducts > 0 ? "false" : "true");
+        if (!yes) {
+            $('#cannotdeletemodal').modal('show');
+        }
+        else {
+            $('#confirmdeletemodal').modal('show');
+        }
+    }
+
+</script>

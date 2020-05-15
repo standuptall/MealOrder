@@ -233,6 +233,10 @@
     <Compile Include="Migrations\202005151949146_footer1.Designer.cs">
       <DependentUpon>202005151949146_footer1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202005151959360_applicationpath.cs" />
+    <Compile Include="Migrations\202005151959360_applicationpath.Designer.cs">
+      <DependentUpon>202005151959360_applicationpath.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\CartHead.cs" />
@@ -394,6 +398,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202005151949146_footer1.resx">
       <DependentUpon>202005151949146_footer1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202005151959360_applicationpath.resx">
+      <DependentUpon>202005151959360_applicationpath.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

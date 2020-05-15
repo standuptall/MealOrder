@@ -14,6 +14,7 @@ namespace BillMealMVC.Controllers
         {
             _settings = _context.Settings.FirstOrDefault();
             var cats = _context.ItemCategories.ToList();
+            ViewBag._settings = _settings;
             ViewBag.Categories = cats;
             ViewBag.FooterDescription = _settings.FooterDescription;
             ViewBag.AppName = _settings.AppName;

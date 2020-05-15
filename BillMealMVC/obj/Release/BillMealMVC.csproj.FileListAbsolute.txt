@@ -125,7 +125,6 @@ C:\Alberto\testwebform\BillMealMVC\BillMealMVC\bin\it\Microsoft.Owin.Security.Fa
 C:\Alberto\testwebform\BillMealMVC\BillMealMVC\bin\it\Microsoft.Owin.Security.Google.resources.dll
 C:\Alberto\testwebform\BillMealMVC\BillMealMVC\bin\it\Microsoft.Owin.Security.Twitter.resources.dll
 C:\Alberto\testwebform\BillMealMVC\BillMealMVC\bin\it\Microsoft.Owin.Security.MicrosoftAccount.resources.dll
-C:\Alberto\testwebform\BillMealMVC\BillMealMVC\obj\Release\BillMealMVC.csprojAssemblyReference.cache
 C:\Alberto\testwebform\BillMealMVC\BillMealMVC\obj\Release\BillMealMVC.Migrations.m.resources
 C:\Alberto\testwebform\BillMealMVC\BillMealMVC\obj\Release\BillMealMVC.Migrations.cartheat.resources
 C:\Alberto\testwebform\BillMealMVC\BillMealMVC\obj\Release\BillMealMVC.Migrations.nuovicampiitemrow.resources
@@ -134,10 +133,12 @@ C:\Alberto\testwebform\BillMealMVC\BillMealMVC\obj\Release\BillMealMVC.Migration
 C:\Alberto\testwebform\BillMealMVC\BillMealMVC\obj\Release\BillMealMVC.Migrations.deliverydate1.resources
 C:\Alberto\testwebform\BillMealMVC\BillMealMVC\obj\Release\BillMealMVC.Migrations.canceledeamilsent.resources
 C:\Alberto\testwebform\BillMealMVC\BillMealMVC\obj\Release\BillMealMVC.Migrations.setin.resources
+C:\Alberto\testwebform\BillMealMVC\BillMealMVC\obj\Release\BillMealMVC.Migrations.footer.resources
+C:\Alberto\testwebform\BillMealMVC\BillMealMVC\obj\Release\BillMealMVC.Migrations.boh.resources
+C:\Alberto\testwebform\BillMealMVC\BillMealMVC\obj\Release\BillMealMVC.Migrations.footer1.resources
 C:\Alberto\testwebform\BillMealMVC\BillMealMVC\obj\Release\BillMealMVC.csproj.GenerateResource.cache
 C:\Alberto\testwebform\BillMealMVC\BillMealMVC\obj\Release\BillMealMVC.csproj.CoreCompileInputs.cache
 C:\Alberto\testwebform\BillMealMVC\BillMealMVC\obj\Release\BillMealMVC.csproj.CopyComplete
 C:\Alberto\testwebform\BillMealMVC\BillMealMVC\obj\Release\BillMealMVC.dll
 C:\Alberto\testwebform\BillMealMVC\BillMealMVC\obj\Release\BillMealMVC.pdb
-C:\Alberto\testwebform\BillMealMVC\BillMealMVC\obj\Release\BillMealMVC.Migrations.footer.resources
-C:\Alberto\testwebform\BillMealMVC\BillMealMVC\obj\Release\BillMealMVC.Migrations.boh.resources
+C:\Alberto\testwebform\BillMealMVC\BillMealMVC\obj\Release\BillMealMVC.Migrations.applicationpath.resources

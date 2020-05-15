@@ -42,7 +42,7 @@
                 @foreach (var item in Model)
                 {
                     var img = "/imgs/" + (item.ItemId) + ".jpg";
-                    if (!File.Exists(System.Configuration.ConfigurationManager.AppSettings["imagepath"] + "\\" + img))
+                    if (!File.Exists(ViewBag._settings.ApplicationPath + "\\" + img))
                     {
                         img = "/imgs/noimage.jpg";
                     }

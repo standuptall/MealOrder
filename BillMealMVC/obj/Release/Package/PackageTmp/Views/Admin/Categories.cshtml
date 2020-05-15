@@ -4,4 +4,36 @@
 }
 
 <h2>Categories</h2>
+<div class="row">
+    <div class="col-md-2">
 
+        <div class="col-md-2">
+            <a class="btn btn-primary btn-block " href="/Admin/viewcategory">Nuova categoria</a>
+        </div>
+    </div>
+    <div class="col-md-10">
+        <table class="table table-dark table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Nome</th>
+                    <th scope="col">Prodotti</th>
+                </tr>
+            </thead>
+            <tbody>
+                @{
+                    int number = 1;
+                }
+                @foreach (BillMealMVC.Models.ItemCategoryModel row in Model)
+                {
+                    <tr class="clickable-row" data-href="/admin/viewcategory?id=@row.CategoryId">
+                        <td scope="row">@row.CategoryId</td>
+                        <td>@row.Description</td>
+                        <td>@row.NumberOfProducts</td>
+                    </tr>
+                    number++;
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

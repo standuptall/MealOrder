@@ -86,7 +86,7 @@ namespace BillMealMVC.Controllers
             {
                 if (!string.IsNullOrEmpty(Request.Files[0].FileName))
                 {
-                    var newfile = Path.Combine(ConfigurationManager.AppSettings["imagepath"].ToString(),"imgs", _currentItem.ItemId + ".jpg");
+                    var newfile =Path.Combine(_settings.ApplicationPath, "imgs", _currentItem.ItemId + ".jpg");
                     Request.Files[0].SaveAs(newfile);
                 }
             }
