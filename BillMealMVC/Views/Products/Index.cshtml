@@ -18,9 +18,9 @@
                 {
                     img = "/imgs/noimage.jpg";
                 }
-                <div class="card float-left mx-2 mt-2" style="width: 18rem; overflow: hidden;">
+                <div class="card float-left mx-2 mt-2" style="width: 18rem; overflow: hidden;" onclick="showproduct('@item.ItemId','@img','@item.Name','@item.Description')">
                     <div class="card-img-top thumb " style="background-image:url('@img')">
-                        @Html.Price(item);
+                        @Html.Price(item)
                     </div>
                     <div class="card-body" style="height:10rem">
                         <h5 class="card-title">@item.Name</h5>
@@ -57,3 +57,39 @@
         </div>
     </div>
 </div>
+
+<div id="productmodal" class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="container-fluid">
+                <div class="card float-left mx-2 mt-2" style="overflow: hidden;width:100%;height:100%;">
+                    <img class="card-img-top ">
+                        
+                    </img>
+                    <div class="card-body" style="height:10rem">
+                        <h5 class="card-title"></h5>
+                        <p class="card-text"><p>
+                            <a href="/products/addtocart?id=" class="btn btn-success">Aggiungi al carrello</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    function showproduct(ItemId, Img, Name, Description) {
+        $('#productmodal').modal('show');
+
+        var modal = $('#productmodal')
+        modal.find('.modal-title').text(Name);
+        modal.find('.card-title').text(Name);
+        modal.find('.card-text').text(Description);
+        modal.find('.card-img-top ').prop("src", Img);
+        modal.find('.card-img-top ').css("width", "auto");
+        modal.find('.card-img-top ').css("height", "auto");
+        modal.find('.card-img-top ').css("margin-left", "auto");
+        modal.find('.card-img-top ').css("margin-right", "auto");
+        modal.find('.btn-success ').prop("href", "/products/addtocart?id=" + ItemId);
+    }
+</script>

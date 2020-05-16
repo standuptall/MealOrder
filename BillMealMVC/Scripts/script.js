@@ -25,6 +25,7 @@ $(document).ready(function () {
     $('.card-home').click(function () {
         window.location.href = "/Products";
     });
+
 });
 function mouseEnter() {
     $('.dropdown-menu').dropdown('show');

@@ -17,6 +17,7 @@
     cursor:pointer;
     opacity: 0.7;
 }
+}
     .card-home:hover {
         transform: scale(1.2);
     }
@@ -168,4 +169,11 @@ footer {
 }
 .navbar {
     z-index: 200;
+}
+footer {
+    font-size:smaller;
+}
+
+.cart-product {
+    cursor:pointer;
 }
