@@ -145,3 +145,4 @@ C:\Alberto\testwebform\BillMealMVC\BillMealMVC\obj\Debug\BillMealMVC.Migrations.
 C:\Alberto\testwebform\BillMealMVC\BillMealMVC\obj\Debug\BillMealMVC.Migrations.applicationpath.resources
 C:\Alberto\testwebform\BillMealMVC\BillMealMVC\obj\Debug\BillMealMVC.Migrations.Metadescription.resources
 C:\Alberto\testwebform\BillMealMVC\BillMealMVC\obj\Debug\BillMealMVC.Migrations.MenuHeadsAndRows.resources
+C:\Alberto\testwebform\BillMealMVC\BillMealMVC\obj\Debug\BillMealMVC.Migrations.menuprice.resources

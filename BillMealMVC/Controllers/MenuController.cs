@@ -3,6 +3,7 @@ using Microsoft.Ajax.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Globalization;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -33,6 +34,7 @@ namespace BillMealMVC.Controllers
             var Description = HttpContext.Request.Form["Description"];
             var Name = HttpContext.Request.Form["Name"];
             var id = HttpContext.Request.Form["MenuHeadId"];
+            var price = double.Parse(HttpContext.Request.Form["Price"], CultureInfo.InvariantCulture);
             if (type.Equals("head"))
             {
                 //aggiungi nuovo menuhead
@@ -56,7 +58,8 @@ namespace BillMealMVC.Controllers
                 var row = new MenuRow
                 {
                      Description = Description,
-                      Name = Name
+                      Name = Name,
+                      Price = price
                 };
                 var menu = _context.MenuHeads
                                     .Include("MenuRows").Where(c => c.MenuHeadId == idnu)
@@ -72,6 +75,7 @@ namespace BillMealMVC.Controllers
             var editid = int.Parse(HttpContext.Request.Form["editid"]);
             var Name = HttpContext.Request.Form["Name"];
             var Description = HttpContext.Request.Form["Description"];
+            var price  = double.Parse(HttpContext.Request.Form["Price"], CultureInfo.InvariantCulture);
             if (editype == "head")
             {
                 var head = _context.MenuHeads.Where(c => c.MenuHeadId == editid).FirstOrDefault();
@@ -88,6 +92,7 @@ namespace BillMealMVC.Controllers
                 {
                     row.Name = Name;
                     row.Description = Description;
+                    row.Price = price;
                     _context.Entry(row).State = EntityState.Modified;
                 }
             }

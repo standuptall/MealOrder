@@ -246,6 +246,10 @@
     <Compile Include="Migrations\202005161730090_MenuHeadsAndRows.Designer.cs">
       <DependentUpon>202005161730090_MenuHeadsAndRows.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202005162102013_menuprice.cs" />
+    <Compile Include="Migrations\202005162102013_menuprice.Designer.cs">
+      <DependentUpon>202005162102013_menuprice.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\CartHead.cs" />
@@ -415,6 +419,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202005161730090_MenuHeadsAndRows.resx">
       <DependentUpon>202005161730090_MenuHeadsAndRows.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202005162102013_menuprice.resx">
+      <DependentUpon>202005162102013_menuprice.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

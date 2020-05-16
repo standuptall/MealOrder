@@ -1,6 +1,11 @@
 ﻿@{
     Layout = null;
 }
+@model List<BillMealMVC.Models.MenuHead> 
+
+@{ 
+    var auth = HttpContext.Current.User.Identity.IsAuthenticated;
+}  
 
 <!DOCTYPE html>
 
@@ -28,53 +33,232 @@
     @Scripts.Render("~/bundles/script")
     @*@RenderSection("scripts", required: false)*@
 </head>
-<body>
+<body style="background-color: #343a40;">
+    <div class="text-center"><img src="~/etc/logo.png" /></div>
     <div class"container-fluid">
-        <div id="accordion">
-            <div class="card">
-                <div class="card-header" id="headingOne">
-                    <h5 class="mb-0">
-                        <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                            Primi
-                        </button>
-                    </h5>
-                </div>
+        <div id="accordion" class="p-4">
+            @foreach (var menu in (List<BillMealMVC.Models.MenuHead>)Model)
+            {
 
-                <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
-                    <div class="card-body">
-                        Secondi
+                <div class="card">
+                    <div class="card-header text-center" id="heading@(menu.MenuHeadId)">
+                        <h5 class="mb-0">
+                            <button class="btn btn-link" data-toggle="collapse" data-target="#collapse@(menu.MenuHeadId)" aria-expanded="false" aria-controls="collapse@(menu.MenuHeadId)">
+                                @menu.Name
+                            </button>
+                            @if (auth)
+                            {
+                                <button onclick="edithead(@menu.MenuHeadId,'@menu.Name')">
+                                    <img style="width:20px;" src="~/etc/edit.png" />
+                                </button>
+                                <button onclick="deletehead(@menu.MenuHeadId)">
+                                    <img style="width:20px;" src="~/etc/delete.png" />
+                                </button>
+                            }
+                        </h5>
+                    </div>
+
+                    <div id="collapse@(menu.MenuHeadId)" class="collapse" aria-labelledby="heading@(menu.MenuHeadId)" data-parent="#accordion">
+                        <div class="card-body">
+                            <div class="list-group">
+                                @foreach (var row in menu.MenuRows)
+                                {
+                                    <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+                                        <div class="d-flex w-100 justify-content-between">
+                                            <h5 class="mb-1">@(row.Name)</h5>
+                                        </div>
+                                        <p class="mb-1">@row.Description</p>
+                                    </a>
+                                    if (auth)
+                                    {
+                                        <button onclick="editrow(@row.MenuRowId,'@row.Name','@row.Description')">
+                                            <img style="width:20px;" src="~/etc/edit.png" />
+                                        </button>
+                                        <button onclick="deleterow(@row.MenuRowId)">
+                                            <img style="width:20px;" src="~/etc/delete.png" />
+                                        </button>
+                                    }
+                                }
+
+                                @if (auth)
+                                {
+                                    <button onclick="addMenuRow(@menu.MenuHeadId)" class="list-group-item list-group-item-action flex-column align-items-start bg-dark" style="opacity:0.5">
+                                        <div class="d-flex w-100 justify-content-between">
+                                            <h5 class="mb-1 text-light">Aggiungi...</h5>
+                                        </div>
+
+                                    </button>
+                                }
+                                </div>
+                        </div>
                     </div>
                 </div>
+            }
+
+            @if (auth)
+            {
+                <div class="card bg-muted" style="opacity:0.5">
+                    <div class="card-header text-center">
+                        <h5 class="mb-0">
+                            <button class="btn btn-link" onclick="addMenuHead()">
+                                Aggiungi
+                            </button>
+                        </h5>
+                    </div>
+                </div>
+            }
             </div>
-            <div class="card">
-                <div class="card-header" id="headingTwo">
-                    <h5 class="mb-0">
-                        <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                            Secondi
-                        </button>
-                    </h5>
+    </div>
+    <div class="modal fade" id="addMenuHeadModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Aggiungi nuova sezione</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
                 </div>
-                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
-                    <div class="card-body">
-                        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
-                    </div>
-                </div>
-            </div>
-            <div class="card">
-                <div class="card-header" id="headingThree">
-                    <h5 class="mb-0">
-                        <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                            Collapsible Group Item #3
-                        </button>
-                    </h5>
-                </div>
-                <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
-                    <div class="card-body">
-                        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
-                    </div>
+                <div class="modal-body">
+                    <form method="post" action="/menu/savedata?type=head">
+                        <div class="form-group">
+                            <label for="namemodal" class="col-form-label">Nome</label>
+                            <input type="text" class="form-control" id="namemodal" name="Name">
+                        </div>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Annulla</button>
+                        <button type="submit" class="btn btn-primary">Salva</button>
+                    </form>
                 </div>
             </div>
         </div>
     </div>
+    <div class="modal fade" id="addMenuRowModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Aggiungi nuova preparazione</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form method="post" action="/menu/savedata?type=row">
+                        <div class="form-group d-none">
+                            <label for="idmodal" class="col-form-label">MenuHeadId</label>
+                            <input type="text" class="form-control" id="idmodal" name="MenuHeadId">
+                        </div>
+                        <div class="form-group">
+                            <label for="namemodal" class="col-form-label">Nome</label>
+                            <input type="text" class="form-control" id="namemodal" name="Name">
+                        </div>
+                        <div class="form-group">
+                            <label for="descriptionmodal" class="col-form-label">Descrizione</label>
+                            <textarea class="form-control" id="descriptionmodal" name="Description"></textarea>
+                        </div>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Annulla</button>
+                        <button type="submit" class="btn btn-primary">Salva</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Modifica oggetto</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form method="post" action="/menu/edit">
+                        <div class="form-group d-none">
+                            <label for="edittype" class="col-form-label">MenuHeadId</label>
+                            <input type="text" class="form-control" id="edittype" name="edittype">
+                        </div>
+                        <div class="form-group d-none">
+                            <label for="editid" class="col-form-label">MenuHeadId</label>
+                            <input type="text" class="form-control" id="editid" name="editid">
+                        </div>
+                        <div class="form-group">
+                            <label for="namemodal" class="col-form-label">Nome</label>
+                            <input type="text" class="form-control" id="namemodal" name="Name">
+                        </div>
+                        <div class="form-group">
+                            <label for="descriptionmodal" class="col-form-label">Descrizione</label>
+                            <textarea class="form-control" id="descriptionmodal" name="Description"></textarea>
+                        </div>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Annulla</button>
+                        <button type="submit" href="/Menu/Edit" class="btn btn-primary">Salva</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Sei sicuro di voler rimuovere l'oggetto selezionato?</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form method="post" action="/Menu/Delete">
+                        <div class="form-group d-none">
+                            <label for="deletetype" class="col-form-label">MenuHeadId</label>
+                            <input type="text" class="form-control" id="deletetype" name="deletetype">
+                        </div>
+                        <div class="form-group d-none">
+                            <label for="deleteid" class="col-form-label">MenuHeadId</label>
+                            <input type="text" class="form-control" id="deleteid" name="deleteid">
+                        </div>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Annulla</button>
+                        <button type="submit" href="/Menu/Delete" class="btn btn-danger">Elimina</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        function addMenuHead() {
+            $('#addMenuHeadModal').modal('show');
+        }
+        function addMenuRow(MenuHeadId) {
+            $('#idmodal').val(MenuHeadId);
+            $('#addMenuRowModal').modal('show');
+        }
+
+
+
+        function edithead(id,name) {
+            $('#edittype').val("head");
+            $('#editid').val(id);
+            $('#editModal').find('#namemodal').val(name);
+            $('#editModal').find('#descriptionmodal').hide();
+            $('#editModal').modal('show');
+        }
+        function deletehead(id) {
+            $('#deletetype').val("head");
+            $('#deleteid').val(id);
+            $('#deleteModal').modal('show');
+        }
+        function editrow(id, name, description) {
+            $('#edittype').val("row");
+            $('#editid').val(id);
+            $('#editModal').find('#namemodal').val(name);
+            $('#editModal').find('#descriptionmodal').show();
+            $('#editModal').find('#descriptionmodal').val(description);
+            $('#editModal').modal('show');
+        }
+        function deleterow(id) {
+            $('#deletetype').val("row");
+            $('#deleteid').val(id);
+            $('#deleteModal').modal('show');
+        }
+    </script>
 </body>
 </html>
