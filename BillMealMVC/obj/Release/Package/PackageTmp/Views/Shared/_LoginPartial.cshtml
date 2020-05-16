@@ -17,7 +17,7 @@
 <ul class="nav navbar-nav navbar-right">
     <li class="nav-item active">
         <a id="cart_button" class="btn btn-primarydropdown-toggle text-light" href="/checkout" data-toggle="dropdown" data-display="static" aria-haspopup="true" aria-expanded="false">
-            Carrello @Html.CartNumberOfItems(Request)
+            <img src="~/etc/cart.png" style="width:30px;" /> @Html.CartNumberOfItems(Request)
             <span class="sr-only">unread messages</span>
         </a>
         @Html.CartPreview(Request)
