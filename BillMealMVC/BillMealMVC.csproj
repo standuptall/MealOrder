@@ -278,6 +278,7 @@
     <Content Include="Content\movie.mp4" />
     <Content Include="etc\delete.png" />
     <Content Include="etc\edit.png" />
+    <Content Include="etc\logo-mobile.png" />
     <Content Include="etc\logo.png" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />

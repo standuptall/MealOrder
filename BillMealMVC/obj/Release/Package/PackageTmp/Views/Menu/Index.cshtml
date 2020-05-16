@@ -34,7 +34,7 @@
     @*@RenderSection("scripts", required: false)*@
 </head>
 <body style="background-color: #343a40;">
-    <div class="text-center"><img src="~/etc/logo.png" /></div>
+    <div class="d-flex justify-content-center"><img class="d-none d-sm-block" src="~/etc/logo.png" /><img class="d-block d-sm-none" src="~/etc/logo-mobile.png" /></div>
     <div class"container-fluid">
         <div id="accordion" class="p-4">
             @foreach (var menu in (List<BillMealMVC.Models.MenuHead>)Model)
@@ -68,10 +68,11 @@
                                             <h5 class="mb-1">@(row.Name)</h5>
                                         </div>
                                         <p class="mb-1">@row.Description</p>
+                                        <small>@Utils.FormatPrice(row.Price) </small>
                                     </a>
                                     if (auth)
                                     {
-                                        <button onclick="editrow(@row.MenuRowId,'@row.Name','@row.Description')">
+                                        <button onclick="editrow(@row.MenuRowId,'@row.Name','@row.Description',@row.Price)">
                                             <img style="width:20px;" src="~/etc/edit.png" />
                                         </button>
                                         <button onclick="deleterow(@row.MenuRowId)">
@@ -154,6 +155,10 @@
                             <label for="descriptionmodal" class="col-form-label">Descrizione</label>
                             <textarea class="form-control" id="descriptionmodal" name="Description"></textarea>
                         </div>
+                        <div class="form-group">
+                            <label for="pricemodal" class="col-form-label">Prezzo</label>
+                            <input type="number" class="form-control" id="pricemodal" name="Price">
+                        </div>
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Annulla</button>
                         <button type="submit" class="btn btn-primary">Salva</button>
                     </form>
@@ -188,6 +193,10 @@
                         <div class="form-group">
                             <label for="descriptionmodal" class="col-form-label">Descrizione</label>
                             <textarea class="form-control" id="descriptionmodal" name="Description"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="pricemodal" class="col-form-label">Prezzo</label>
+                            <input type="number" class="form-control" id="pricemodal" name="Price"></input>
                         </div>
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Annulla</button>
                         <button type="submit" href="/Menu/Edit" class="btn btn-primary">Salva</button>
@@ -239,6 +248,7 @@
             $('#editid').val(id);
             $('#editModal').find('#namemodal').val(name);
             $('#editModal').find('#descriptionmodal').hide();
+            $('#editModal').find('#pricemodal').hide();
             $('#editModal').modal('show');
         }
         function deletehead(id) {
@@ -246,12 +256,14 @@
             $('#deleteid').val(id);
             $('#deleteModal').modal('show');
         }
-        function editrow(id, name, description) {
+        function editrow(id, name, description,price) {
             $('#edittype').val("row");
             $('#editid').val(id);
             $('#editModal').find('#namemodal').val(name);
             $('#editModal').find('#descriptionmodal').show();
+            $('#editModal').find('#pricemodal').show();
             $('#editModal').find('#descriptionmodal').val(description);
+            $('#editModal').find('#pricemodal').val(price);
             $('#editModal').modal('show');
         }
         function deleterow(id) {

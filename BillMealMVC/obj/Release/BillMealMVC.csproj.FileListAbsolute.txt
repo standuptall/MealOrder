@@ -145,3 +145,4 @@ C:\Alberto\testwebform\BillMealMVC\BillMealMVC\obj\Release\BillMealMVC.Migration
 C:\Alberto\testwebform\BillMealMVC\BillMealMVC\obj\Release\BillMealMVC.csprojAssemblyReference.cache
 C:\Alberto\testwebform\BillMealMVC\BillMealMVC\obj\Release\BillMealMVC.Migrations.Metadescription.resources
 C:\Alberto\testwebform\BillMealMVC\BillMealMVC\obj\Release\BillMealMVC.Migrations.MenuHeadsAndRows.resources
+C:\Alberto\testwebform\BillMealMVC\BillMealMVC\obj\Release\BillMealMVC.Migrations.menuprice.resources
