@@ -124,17 +124,18 @@ namespace BillMealMVC.Controllers
                 MailMessage mailMessage = new MailMessage();
                 mailMessage.To.Add(order.Email);
                 mailMessage.From = new MailAddress("noreply@italianburgerpavia.it");
+                mailMessage.Sender = new MailAddress(_settings.UserEmail);
                 mailMessage.Subject = "Il tuo ordine è stato confermato";
                 mailMessage.Body = template;
                 mailMessage.IsBodyHtml = true;
-                SmtpClient smtpClient = new SmtpClient("smtps.aruba.it");
+                SmtpClient smtpClient = new SmtpClient("pro.eu.turbo-smtp.com");
 
 
                 smtpClient.DeliveryMethod = SmtpDeliveryMethod.Network;
                 smtpClient.UseDefaultCredentials = false;
                 smtpClient.EnableSsl = true;
-                smtpClient.Host = "smtps.aruba.it";
-                smtpClient.Port = 465;
+                smtpClient.Host = "pro.eu.turbo-smtp.com";
+                smtpClient.Port = 25;
                 smtpClient.Credentials = new NetworkCredential(_settings.UserEmail, _settings.PasswordEmail);
                 smtpClient.Send(mailMessage);
             }
