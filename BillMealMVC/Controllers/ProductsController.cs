@@ -20,9 +20,12 @@ namespace BillMealMVC.Controllers
         public ActionResult Index(int? cat)
         {
             List<Item> items = null;
+            ViewBag.CategoryName = "Products";
             if (cat != null && cat > 0)
             {
                 items = context.Items.Where(c => c.CategoryId == cat).ToList();
+                ViewBag.CategoryName = (context.ItemCategories.Where(c => c.CategoryId == cat).FirstOrDefault()?.Description);
+                
             }
             else
                 items = context.Items.ToList();

@@ -13,5 +13,6 @@ namespace BillMealMVC.Models
         public string ApplicationPath { get; set; }
         public string UserEmail { get; set; }
         public string PasswordEmail { get; set; }
+        public string MetaDescription { get; set; }
     }
 }

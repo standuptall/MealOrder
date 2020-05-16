@@ -143,3 +143,4 @@ C:\Alberto\testwebform\BillMealMVC\BillMealMVC\obj\Release\BillMealMVC.dll
 C:\Alberto\testwebform\BillMealMVC\BillMealMVC\obj\Release\BillMealMVC.pdb
 C:\Alberto\testwebform\BillMealMVC\BillMealMVC\obj\Release\BillMealMVC.Migrations.applicationpath.resources
 C:\Alberto\testwebform\BillMealMVC\BillMealMVC\obj\Release\BillMealMVC.csprojAssemblyReference.cache
+C:\Alberto\testwebform\BillMealMVC\BillMealMVC\obj\Release\BillMealMVC.Migrations.Metadescription.resources
