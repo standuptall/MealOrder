@@ -34,7 +34,9 @@ namespace BillMealMVC.Controllers
             var Description = HttpContext.Request.Form["Description"];
             var Name = HttpContext.Request.Form["Name"];
             var id = HttpContext.Request.Form["MenuHeadId"];
-            var price = double.Parse(HttpContext.Request.Form["Price"], CultureInfo.InvariantCulture);
+            double price = 0;
+            if (!string.IsNullOrEmpty(HttpContext.Request.Form["Price"]))
+                price = double.Parse(HttpContext.Request.Form["Price"], CultureInfo.InvariantCulture);
             if (type.Equals("head"))
             {
                 //aggiungi nuovo menuhead
@@ -75,7 +77,9 @@ namespace BillMealMVC.Controllers
             var editid = int.Parse(HttpContext.Request.Form["editid"]);
             var Name = HttpContext.Request.Form["Name"];
             var Description = HttpContext.Request.Form["Description"];
-            var price  = double.Parse(HttpContext.Request.Form["Price"], CultureInfo.InvariantCulture);
+            double price = 0;
+            if (!string.IsNullOrEmpty(HttpContext.Request.Form["Price"]))
+                price = double.Parse(HttpContext.Request.Form["Price"], CultureInfo.InvariantCulture);
             if (editype == "head")
             {
                 var head = _context.MenuHeads.Where(c => c.MenuHeadId == editid).FirstOrDefault();
