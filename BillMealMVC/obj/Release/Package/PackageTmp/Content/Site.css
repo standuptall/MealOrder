@@ -173,3 +173,7 @@ footer {
 footer {
     font-size:smaller;
 }
+
+.cart-product {
+    cursor:pointer;
+}

@@ -18,13 +18,13 @@
                 {
                     img = "/imgs/noimage.jpg";
                 }
-                <div class="card float-left mx-2 mt-2" style="width: 18rem; overflow: hidden;" onclick="showproduct('@item.ItemId','@img','@item.Name','@item.Description')">
+                <div class="card float-left mx-2 mt-2 card-product" style="width: 18rem; overflow: hidden;" onclick="showproduct('@item.ItemId','@img','@item.Name.Replace("'"," ")','@item.Description.Replace("'"," ")')">
                     <div class="card-img-top thumb " style="background-image:url('@img')">
                         @Html.Price(item)
                     </div>
-                    <div class="card-body" style="height:10rem">
+                    <div class="card-body" style="height:auto;">
                         <h5 class="card-title">@item.Name</h5>
-                        <p class="card-text">@item.Description<p>
+                        <p class="card-text-list card-text text-truncate">@item.Description<p>
                             <a href="/products/addtocart?id=@(item.ItemId)" class="btn btn-success">Aggiungi al carrello</a>
                     </div>
                 </div>
@@ -60,17 +60,19 @@
 
 <div id="productmodal" class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
-        <div class="modal-content">
+        <div class="modal-content  pd-2">
             <div class="container-fluid">
                 <div class="card float-left mx-2 mt-2" style="overflow: hidden;width:100%;height:100%;">
                     <img class="card-img-top ">
                         
                     </img>
-                    <div class="card-body" style="height:10rem">
+                    <div class="card-body" style="height:auto;">
                         <h5 class="card-title"></h5>
                         <p class="card-text"><p>
-                            <a href="/products/addtocart?id=" class="btn btn-success">Aggiungi al carrello</a>
-                    </div>
+
+    <button type="button" class="btn btn-secondary" data-dismiss="modal">Torna ai prodotti</button>
+    <a href="/products/addtocart?id=" class="btn btn-success">Aggiungi al carrello</a>
+</div>
                 </div>
             </div>
         </div>
@@ -86,7 +88,7 @@
         modal.find('.card-title').text(Name);
         modal.find('.card-text').text(Description);
         modal.find('.card-img-top ').prop("src", Img);
-        modal.find('.card-img-top ').css("width", "auto");
+        modal.find('.card-img-top ').css("max-width", "80vh");
         modal.find('.card-img-top ').css("height", "auto");
         modal.find('.card-img-top ').css("margin-left", "auto");
         modal.find('.card-img-top ').css("margin-right", "auto");
