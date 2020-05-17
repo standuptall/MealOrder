@@ -24,5 +24,6 @@ namespace BillMealMVC.Models
         public bool Canceled { get; set; }
         public bool EmailSent { get; set; }
         public double TotalPaid { get; set; }
+        public string TransactionId { get; set; }
     }
 }

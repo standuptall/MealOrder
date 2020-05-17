@@ -19,5 +19,6 @@ namespace BillMealMVC.Model
         public DbSet<Settings> Settings { get; set; }
         public DbSet<MenuHead> MenuHeads { get; set; }
         public DbSet<MenuRow> MenuRows { get; set; }
+        public DbSet<RequestLog> RequestLog { get; set; }
     }
 }

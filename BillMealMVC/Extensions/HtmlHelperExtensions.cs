@@ -55,10 +55,10 @@ namespace BillMealMVC.Extensions
 
             return MvcHtmlString.Create(html);
         }
-        public static IHtmlString CartNumberOfItems(this HtmlHelper htmlHelper, HttpRequestBase request)
+        public static IHtmlString CartNumberOfItems(this HtmlHelper htmlHelper, HttpRequestBase request,HttpResponseBase response)
         {
             var context = new MealContext();
-            var cart = Utils.GetCart(context, request);
+            var cart = Utils.GetCart(context, request, response);
             double number = 0;
             if (cart != null)
                 number = cart.Items.Select(c => c.Quantity).Sum();
@@ -69,7 +69,7 @@ namespace BillMealMVC.Extensions
 
             return MvcHtmlString.Create(html);
         }
-        public static IHtmlString CartPreview(this HtmlHelper htmlHelper, HttpRequestBase request)
+        public static IHtmlString CartPreview(this HtmlHelper htmlHelper, HttpRequestBase request,HttpResponseBase response)
         {
             //    < div class="btn-group">
             //    <form class="p-4">
@@ -88,7 +88,7 @@ namespace BillMealMVC.Extensions
             //    </form>
             //</div>
             var context = new MealContext();
-            var cart = Utils.GetCart(context, request);
+            var cart = Utils.GetCart(context, request, response);
             var bd = new StringBuilder();
             var divext = new TagBuilder("div");
             divext.AddCssClass("btn-group");

@@ -3,6 +3,7 @@ using BillMealMVC.Models;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -26,12 +27,12 @@ namespace BillMealMVC.Controllers
             {
                 return Confirm();
             }
-            var cart = Utils.GetCart(context,Request);
+            var cart = Utils.GetCart(context,Request,Response);
             
             if (cart == null || cart.Items.Count == 0)
                 return Redirect("/Products");
             LoadDeliveries();
-            return View(cart);
+            return View("Index",cart);
         }
         private void LoadDeliveries()
         {
@@ -58,7 +59,7 @@ namespace BillMealMVC.Controllers
         }
         public ActionResult review(int id,int qty)
         {
-            var cart = Utils.GetCart(context, Request);
+            var cart = Utils.GetCart(context, Request,Response);
             if (cart != null) { 
                 var item = cart.Items.Where(c => c.CartRowId == id).FirstOrDefault();
                 if (item != null)
@@ -83,7 +84,7 @@ namespace BillMealMVC.Controllers
         {
             ViewBag.ErrorMessage = null;
 
-            var cart = Utils.GetCart(context, Request);
+            var cart = Utils.GetCart(context, Request,Response);
             var Notes = HttpContext.Request.Form["Notes"];
             var Email = HttpContext.Request.Form["Email"];
             var Phone = HttpContext.Request.Form["Phone"];
@@ -119,8 +120,6 @@ namespace BillMealMVC.Controllers
                 cart.Email = Email;
                 cart.Phone = Phone;
                 cart.DeliveryDate = deliverydate;
-                cart.Closed = true;
-                cart.ClosedDate = DateTime.Now;
                 cart.ConfirmedTotal = cart.Items.Select(c => c.ItemPrice*c.Quantity).Sum();
                 context.SaveChanges();
                 if (paymentmethod == "paypal")
@@ -129,16 +128,19 @@ namespace BillMealMVC.Controllers
                 }
                 else
                 {
-                    Response.Cookies["meal_id"].Expires = DateTime.Now.AddDays(-1);
-                    return View("Success",cart);
+                    return Success(cart);
                 }
             }
 
             return Redirect("Products");
         }
-        public ActionResult Success()
+        public ActionResult Success(CartHead cart)
         {
-            return View();
+            Response.Cookies["meal_id"].Expires = DateTime.Now.AddDays(-1);
+            cart.Closed = true;
+            cart.ClosedDate = DateTime.Now;
+            context.SaveChanges();
+            return View("Success");
         }
         public ActionResult gabhv5255sdna4dv4tac52n4s2bz5c256f5x6v2n5s6a56f59asd5g2s6bs6()
         {
@@ -149,16 +151,15 @@ namespace BillMealMVC.Controllers
 
             //Reply back a 200 code
             return new HttpStatusCodeResult(HttpStatusCode.OK);
-            throw new NotImplementedException();
         }
 
         private void VerifyTask(HttpRequestBase ipnRequest)
         {
             var verificationResponse = string.Empty;
-
+            WebResponse response = null;
             try
             {
-                var verificationRequest = (HttpWebRequest)WebRequest.Create("https://www.sandbox.paypal.com/cgi-bin/webscr");
+                var verificationRequest = (HttpWebRequest)WebRequest.Create("https://ipnpb.paypal.com/cgi-bin/webscr");
 
                 //Set values for the verification request
                 verificationRequest.Method = "POST";
@@ -176,52 +177,111 @@ namespace BillMealMVC.Controllers
                 streamOut.Close();
 
                 //Send the request to PayPal and get the response
-                var streamIn = new StreamReader(verificationRequest.GetResponse().GetResponseStream());
+                response = verificationRequest.GetResponse();
+                var streamIn = new StreamReader(response.GetResponseStream());
                 verificationResponse = streamIn.ReadToEnd();
                 streamIn.Close();
 
             }
-            catch (Exception exception)
+            catch (Exception ex)
             {
-                //Capture exception for manual investigation
+
+                context.RequestLog.Add(new RequestLog
+                {
+                    Date = DateTime.Now,
+                    Key = "VerifyTask error",
+                    Value = ex.Message
+                });
+                context.SaveChanges();
             }
 
-            ProcessVerificationResponse(verificationResponse);
+            ProcessVerificationResponse(verificationResponse, ipnRequest);
 
         }
 
-        private void ProcessVerificationResponse(string verificationResponse)
+        private void ProcessVerificationResponse(string verificationResponse, HttpRequestBase ipnRequest)
         {
-            if (verificationResponse.Equals("VERIFIED"))
+            var invoice = ipnRequest.Form["invoice"];
+            try
             {
-                // check that Payment_status=Completed
-                // check that Txn_id has not been previously processed
-                // check that Receiver_email is your Primary PayPal email
-                // check that Payment_amount/Payment_currency are correct
-                // process payment
+                if (verificationResponse.Equals("VERIFIED"))
+                {
+                    var Payment_status = ipnRequest.Form["Payment_status"];
+                    var Txn_id = ipnRequest.Form["Txn_id"];
+                    var Receiver_email = ipnRequest.Form["Receiver_email"];
+                    var Payment_amount = ipnRequest.Form["Payment_amount"];
+                    var idcart = int.Parse(invoice.Substring(invoice.IndexOf("#") + 1, invoice.Length - invoice.IndexOf("#") - 1));
+                    var cart = context.Cart.Where(c => c.CartId == idcart).FirstOrDefault();
+                    if (cart == null)
+                        throw new Exception("Ordine " + idcart + " non trovato!");
+                    if (cart.Closed)
+                        throw new Exception("Ordine " + idcart + " era già chiuso!");
+                    if (Payment_status != "Completed")
+                        throw new Exception("Payload ricevuto tuttavia il pagamento non è completo");
+                    cart.TotalPaid = double.Parse(Payment_amount, CultureInfo.InvariantCulture);
+                    cart.TransactionId = Txn_id;
+                    cart.Closed = true;
+                    cart.ClosedDate = DateTime.Now;
+                    context.SaveChanges();
+                }
+                else if (verificationResponse.Equals("INVALID"))
+                {
+
+                    context.RequestLog.Add(new RequestLog
+                    {
+                        Date = DateTime.Now,
+                        Key = "INVALID",
+                        Value = "INVALID "+ invoice
+                    });
+                    context.SaveChanges();
+                }
+                else
+                {
+
+                    context.RequestLog.Add(new RequestLog
+                    {
+                        Date = DateTime.Now,
+                        Key = "verificationResponse string not valid " + invoice,
+                        Value = verificationResponse
+                    });
+                    context.SaveChanges();
+                }
             }
-            else if (verificationResponse.Equals("INVALID"))
+            catch(Exception ex)
             {
-                //Log for manual investigation
-            }
-            else
-            {
-                //Log error
+                context.RequestLog.Add(new RequestLog
+                {
+                    Date = DateTime.Now, 
+                    Key = "exception during verificationResponse " + invoice,
+                    Value = ex.Message
+                });
+                context.SaveChanges();
             }
         }
 
         private void LogRequest(HttpRequestBase request)
         {
-            throw new NotImplementedException();
+            context.RequestLog.Add(new RequestLog
+            {
+                Date = DateTime.Now,
+                Key = "Chiamata",
+                Value = "Chiamata da IP " + request.UserHostAddress
+            });
+            context.SaveChanges();
         }
 
         public ActionResult Payment(int? orderid)
         {
-            throw new NotImplementedException();
+            if (orderid == null)
+                return Redirect("/Products");
+            var cart = context.Cart.Where(c => c.CartId == orderid.Value).FirstOrDefault();
+            if (cart == null)
+                return Redirect("/products");
+            return Success(cart);
         }
         public ActionResult PaymentCanceled(int? orderid)
         {
-            throw new NotImplementedException();
+            return Index();
         }
     }
 }

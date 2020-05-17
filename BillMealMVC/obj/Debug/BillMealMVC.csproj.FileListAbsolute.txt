@@ -295,3 +295,5 @@ C:\Alberto\testwebform\BillMealMVC\master\BillMealMVC\obj\Debug\BillMealMVC.cspr
 C:\Alberto\testwebform\BillMealMVC\master\BillMealMVC\obj\Debug\BillMealMVC.dll
 C:\Alberto\testwebform\BillMealMVC\master\BillMealMVC\obj\Debug\BillMealMVC.pdb
 C:\Alberto\testwebform\BillMealMVC\master\BillMealMVC\obj\Debug\BillMealMVC.Migrations.paypal.resources
+C:\Alberto\testwebform\BillMealMVC\master\BillMealMVC\obj\Debug\BillMealMVC.Migrations.log.resources
+C:\Alberto\testwebform\BillMealMVC\master\BillMealMVC\obj\Debug\BillMealMVC.Migrations.Alcunemodifichepaypal.resources

@@ -254,6 +254,14 @@
     <Compile Include="Migrations\202005171400565_paypal.Designer.cs">
       <DependentUpon>202005171400565_paypal.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202005171525262_log.cs" />
+    <Compile Include="Migrations\202005171525262_log.Designer.cs">
+      <DependentUpon>202005171525262_log.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202005171907040_Alcunemodifichepaypal.cs" />
+    <Compile Include="Migrations\202005171907040_Alcunemodifichepaypal.Designer.cs">
+      <DependentUpon>202005171907040_Alcunemodifichepaypal.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\CartHead.cs" />
@@ -266,6 +274,7 @@
     <Compile Include="Models\MealContext.cs" />
     <Compile Include="Models\MenuHead.cs" />
     <Compile Include="Models\MenuRow.cs" />
+    <Compile Include="Models\RequestLog.cs" />
     <Compile Include="Models\Settings.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -432,6 +441,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202005171400565_paypal.resx">
       <DependentUpon>202005171400565_paypal.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202005171525262_log.resx">
+      <DependentUpon>202005171525262_log.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202005171907040_Alcunemodifichepaypal.resx">
+      <DependentUpon>202005171907040_Alcunemodifichepaypal.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

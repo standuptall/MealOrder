@@ -20,7 +20,7 @@ namespace BillMealMVC
             return newprice;
 
         }
-        public static CartHead GetCart(MealContext context,HttpRequestBase request)
+        public static CartHead GetCart(MealContext context,HttpRequestBase request,HttpResponseBase response)
         {
             var cook = request.Cookies.Get("meal_id");
             if (cook != null)
@@ -28,6 +28,8 @@ namespace BillMealMVC
                 var cart = context.Cart.Where(c => c.meal_id == cook.Value)
                     .Include(c => c.Items)
                     .FirstOrDefault();
+                if (cart.Closed)
+                    response.Cookies["meal_id"].Expires = DateTime.Now.AddDays(-1);
                 return cart;
             }
             return null;
