@@ -21,7 +21,12 @@
         }
         @foreach (BillMealMVC.Models.CartHead row in Model)
         {
-        <tr class="clickable-row" data-href="/admin/vieworder?id=@row.CartId">
+            var addclass= "";
+            if (row.Canceled)
+            {
+                addclass = "bg-danger";
+            }
+        <tr class="clickable-row @addclass" data-href="/admin/vieworder?id=@row.CartId">
             <th scope="row">@row.CartId</th>
             <td>@row.CreationDate</td>
             <td>@row.Email</td>

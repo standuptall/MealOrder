@@ -145,37 +145,42 @@ namespace BillMealMVC.Controllers
         public ActionResult gabhv5255sdna4dv4tac52n4s2bz5c256f5x6v2n5s6a56f59asd5g2s6bs6()
         {
             LogRequest(Request);
+            var verificationRequest = (HttpWebRequest)WebRequest.Create("https://ipnpb.paypal.com/cgi-bin/webscr");
 
+            //Set values for the verification request
+            verificationRequest.Method = "POST";
+            verificationRequest.ContentType = "application/x-www-form-urlencoded";
+            var param = Request.BinaryRead(Request.ContentLength);
+            var strRequest = Encoding.ASCII.GetString(param);
+
+            //Add cmd=_notify-validate to the payload
+            strRequest = "cmd=_notify-validate&" + strRequest;
+            verificationRequest.ContentLength = strRequest.Length;
+
+            //Attach payload to the verification request
+            var streamOut = new StreamWriter(verificationRequest.GetRequestStream(), Encoding.ASCII);
+            streamOut.Write(strRequest);
+            streamOut.Close();
+            var dict = new Dictionary<string, string>();
+            dict.Add("Payment_status", Request.Form["Payment_status"]);
+            dict.Add("Txn_id", Request.Form["Txn_id"]);
+            dict.Add("Receiver_email", Request.Form["Receiver_email"]);
+            dict.Add("mc_gross", Request.Form["mc_gross"]);
+            dict.Add("invoice", Request.Form["invoice"]);
             //Fire and forget verification task
-            Task.Run(() => VerifyTask(Request));
+            Task.Run(() => VerifyTask(verificationRequest,dict));
 
             //Reply back a 200 code
             return new HttpStatusCodeResult(HttpStatusCode.OK);
         }
 
-        private void VerifyTask(HttpRequestBase ipnRequest)
+        private void VerifyTask(HttpWebRequest verificationRequest, Dictionary<string, string> dict)
         {
             var verificationResponse = string.Empty;
             WebResponse response = null;
             try
             {
-                var verificationRequest = (HttpWebRequest)WebRequest.Create("https://ipnpb.paypal.com/cgi-bin/webscr");
-
-                //Set values for the verification request
-                verificationRequest.Method = "POST";
-                verificationRequest.ContentType = "application/x-www-form-urlencoded";
-                var param = Request.BinaryRead(ipnRequest.ContentLength);
-                var strRequest = Encoding.ASCII.GetString(param);
-
-                //Add cmd=_notify-validate to the payload
-                strRequest = "cmd=_notify-validate&" + strRequest;
-                verificationRequest.ContentLength = strRequest.Length;
-
-                //Attach payload to the verification request
-                var streamOut = new StreamWriter(verificationRequest.GetRequestStream(), Encoding.ASCII);
-                streamOut.Write(strRequest);
-                streamOut.Close();
-
+                
                 //Send the request to PayPal and get the response
                 response = verificationRequest.GetResponse();
                 var streamIn = new StreamReader(response.GetResponseStream());
@@ -189,27 +194,27 @@ namespace BillMealMVC.Controllers
                 context.RequestLog.Add(new RequestLog
                 {
                     Date = DateTime.Now,
-                    Key = "VerifyTask error",
+                    Key = "VerifyTask error" + " " + ex.StackTrace,
                     Value = ex.Message
                 });
                 context.SaveChanges();
             }
 
-            ProcessVerificationResponse(verificationResponse, ipnRequest);
+            ProcessVerificationResponse(verificationResponse,dict);
 
         }
 
-        private void ProcessVerificationResponse(string verificationResponse, HttpRequestBase ipnRequest)
+        private void ProcessVerificationResponse(string verificationResponse, Dictionary<string, string> dict)
         {
-            var invoice = ipnRequest.Form["invoice"];
+            var invoice = dict["invoice"];
             try
             {
                 if (verificationResponse.Equals("VERIFIED"))
                 {
-                    var Payment_status = ipnRequest.Form["Payment_status"];
-                    var Txn_id = ipnRequest.Form["Txn_id"];
-                    var Receiver_email = ipnRequest.Form["Receiver_email"];
-                    var Payment_amount = ipnRequest.Form["Payment_amount"];
+                    var Payment_status = dict["Payment_status"];
+                    var Txn_id = dict["Txn_id"];
+                    var Receiver_email = dict["Receiver_email"];
+                    var Payment_amount = dict["mc_gross"];
                     var idcart = int.Parse(invoice.Substring(invoice.IndexOf("#") + 1, invoice.Length - invoice.IndexOf("#") - 1));
                     var cart = context.Cart.Where(c => c.CartId == idcart).FirstOrDefault();
                     if (cart == null)
@@ -252,7 +257,7 @@ namespace BillMealMVC.Controllers
                 context.RequestLog.Add(new RequestLog
                 {
                     Date = DateTime.Now, 
-                    Key = "exception during verificationResponse " + invoice,
+                    Key = "exception during verificationResponse " + invoice+ " "+ex.StackTrace,
                     Value = ex.Message
                 });
                 context.SaveChanges();
