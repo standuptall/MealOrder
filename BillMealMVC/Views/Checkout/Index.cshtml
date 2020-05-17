@@ -48,41 +48,52 @@
                     </div>
                 </div>
             }
-                <div class="mx-auto col-md-10">
-                    <div class="form-group " style="width:13em;">
-                        <label for="deliverytime" class="success">Ora di consegna</label>
-                        <select name="deliverytime" id="deliverytime" class="form-control" required>
-                            <option disabled selected value=""> -- Scegli un orario -- </option>
-                            @foreach (string[] del in ViewBag.Deliveries)
-                            {
-                                <option value="@del[0]">@del[1]</option>
-                            }
+        <div class="mx-auto col-md-10">
+            <div class="form-group " style="width:13em;">
+                <label for="deliverytime" class="success">Ora di consegna</label>
+                <select name="deliverytime" id="deliverytime" class="form-control" required>
+                    <option disabled selected value=""> -- Scegli un orario -- </option>
+                    @foreach (string[] del in ViewBag.Deliveries)
+                    {
+                        <option value="@del[0]">@del[1]</option>
+                    }
 
-                        </select>
-                    </div>
-                    <div class="input-group">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text" id="inputGroupPrepend3">@("@")</span>
-                        </div>
-                        <input name="email" type="email" class="form-control" id="email" placeholder="E-mail" aria-describedby="inputGroupPrepend3" required>
-                        
-                    </div>
-                    <div class="form-group ">
-                        <label for="phone" class="success">Numero di telefono</label>
-                        <input type="number" name="Phone" id="Phone" class="form-control" style="width:100%;" placeholder="Telefono" required />
-                        <div class="invalid-feedback">
-                            You must agree before submitting.
-                        </div>
-                    </div>
-                    <div class="form-group ">
-                        <label for="Notes" class="success">Inserisci note aggiuntive all'ordine (es. ingredienti +/-)</label>
-                        <textarea rows="3" name="Notes" id="Notes" class="form-control" placeholder="Note" style="width:100%;"></textarea>
-                        <div class="invalid-feedback">
-                            You must agree before submitting.
-                        </div>
-                    </div>
-                    <button type="submit" class="btn btn-success float-right mx-1">Invia ordine</button>
+                </select>
+            </div>
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="inputGroupPrepend3">@("@")</span>
                 </div>
+                <input name="email" type="email" class="form-control" id="email" placeholder="E-mail" aria-describedby="inputGroupPrepend3" required>
+
+            </div>
+            <div class="form-group ">
+                <label for="phone" class="success">Numero di telefono</label>
+                <input type="number" name="Phone" id="Phone" class="form-control" style="width:100%;" placeholder="Telefono" required />
+                <div class="invalid-feedback">
+                    You must agree before submitting.
+                </div>
+            </div>
+            <div class="form-group ">
+                <label for="Notes" class="success">Inserisci note aggiuntive all'ordine (es. ingredienti +/-)</label>
+                <textarea rows="3" name="Notes" id="Notes" class="form-control" placeholder="Note" style="width:100%;"></textarea>
+                <div class="invalid-feedback">
+                    You must agree before submitting.
+                </div>
+            </div>
+            @if (ViewBag._settings.PagaOnline)
+            {
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="paymentmethod" id="nopay" value="nopay" required>
+                <label class="form-check-label" for="nopay">Ritira in negozio</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="paymentmethod" id="paypal" value="paypal">
+                <label class="form-check-label" for="paypal">Paga con Paypal</label>
+            </div>
+            }
+            <button type="submit" class="btn btn-success float-right mx-1">Invia ordine</button>
+        </div>
             </div>
     </div>
 </form>

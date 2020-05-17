@@ -7,8 +7,7 @@
     var auth = HttpContext.Current.User.Identity.IsAuthenticated;
 }  
 
-<!DOCTYPE html>
-
+<!DOCTYPE htm
 <html>
 <head>
     <!-- Global site tag (gtag.js) - Google Analytics -->
@@ -43,7 +42,7 @@
                 <div class="card">
                     <div class="card-header text-center" id="heading@(menu.MenuHeadId)">
                         <h5 class="mb-0">
-                            <button class="btn btn-link" data-toggle="collapse" data-target="#collapse@(menu.MenuHeadId)" aria-expanded="false" aria-controls="collapse@(menu.MenuHeadId)">
+                            <button class="btn" data-toggle="collapse" data-target="#collapse@(menu.MenuHeadId)" aria-expanded="false" aria-controls="collapse@(menu.MenuHeadId)">
                                 @menu.Name
                             </button>
                             @if (auth)
@@ -72,7 +71,7 @@
                                     </a>
                                     if (auth)
                                     {
-                                        <button onclick="editrow(@row.MenuRowId,'@row.Name','@row.Description',@row.Price)">
+                                        <button onclick="editrow(@row.MenuRowId,'@row.Name','@row.Description',@row.Price.ToString().Replace(",","."))">
                                             <img style="width:20px;" src="~/etc/edit.png" />
                                         </button>
                                         <button onclick="deleterow(@row.MenuRowId)">
@@ -157,7 +156,7 @@
                         </div>
                         <div class="form-group">
                             <label for="pricemodal" class="col-form-label">Prezzo</label>
-                            <input type="number" class="form-control" id="pricemodal" name="Price">
+                            <input type="number" step="0.01" class="form-control" id="pricemodal" name="Price">
                         </div>
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Annulla</button>
                         <button type="submit" class="btn btn-primary">Salva</button>
@@ -196,7 +195,7 @@
                         </div>
                         <div class="form-group">
                             <label for="pricemodal" class="col-form-label">Prezzo</label>
-                            <input type="number" class="form-control" id="pricemodal" name="Price"></input>
+                            <input type="number" step="0.01" class="form-control" id="pricemodal" name="Price"></input>
                         </div>
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Annulla</button>
                         <button type="submit" href="/Menu/Edit" class="btn btn-primary">Salva</button>

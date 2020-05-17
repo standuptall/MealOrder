@@ -250,6 +250,10 @@
     <Compile Include="Migrations\202005162102013_menuprice.Designer.cs">
       <DependentUpon>202005162102013_menuprice.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202005171400565_paypal.cs" />
+    <Compile Include="Migrations\202005171400565_paypal.Designer.cs">
+      <DependentUpon>202005171400565_paypal.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\CartHead.cs" />
@@ -362,6 +366,7 @@
     <Content Include="Views\Admin\ViewOrder.cshtml" />
     <Content Include="Views\Admin\ViewCategory.cshtml" />
     <Content Include="Views\Menu\Index.cshtml" />
+    <Content Include="Views\Checkout\Payment.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -424,6 +429,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202005162102013_menuprice.resx">
       <DependentUpon>202005162102013_menuprice.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202005171400565_paypal.resx">
+      <DependentUpon>202005171400565_paypal.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

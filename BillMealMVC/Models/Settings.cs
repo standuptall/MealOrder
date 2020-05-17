@@ -14,5 +14,6 @@ namespace BillMealMVC.Models
         public string UserEmail { get; set; }
         public string PasswordEmail { get; set; }
         public string MetaDescription { get; set; }
+        public bool PagaOnline { get; set; }
     }
 }

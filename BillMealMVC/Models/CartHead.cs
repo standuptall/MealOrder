@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Diagnostics.Eventing.Reader;
 using System.Linq;
 using System.Web;
 
@@ -22,5 +23,6 @@ namespace BillMealMVC.Models
         public double ConfirmedTotal { get; set; }
         public bool Canceled { get; set; }
         public bool EmailSent { get; set; }
+        public double TotalPaid { get; set; }
     }
 }
