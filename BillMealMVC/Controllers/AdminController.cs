@@ -128,14 +128,14 @@ namespace BillMealMVC.Controllers
                 mailMessage.Subject = "Il tuo ordine è stato confermato";
                 mailMessage.Body = template;
                 mailMessage.IsBodyHtml = true;
-                SmtpClient smtpClient = new SmtpClient("pro.turbo-smtp.com");
+                SmtpClient smtpClient = new SmtpClient("smtp.italianburgerpavia.it");
 
 
-                smtpClient.DeliveryMethod = SmtpDeliveryMethod.Network;
+                //smtpClient.DeliveryMethod = SmtpDeliveryMethod.Network;
                 smtpClient.UseDefaultCredentials = false;
-                smtpClient.EnableSsl = true;
-                smtpClient.Host = "pro.turbo-smtp.com";
-                smtpClient.Port = 465;
+                //smtpClient.EnableSsl = true;
+                smtpClient.Host = "smtp.italianburgerpavia.it";
+                smtpClient.Port = 25;
                 smtpClient.Credentials = new NetworkCredential(_settings.UserEmail, _settings.PasswordEmail);
                 smtpClient.Send(mailMessage);
             }
